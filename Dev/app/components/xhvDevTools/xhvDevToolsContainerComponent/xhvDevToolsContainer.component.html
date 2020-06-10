@@ -1,0 +1,30 @@
+<component id="" class="vh-100 cf-panel-wrap" >
+    <xhv-script url="../components/xhvDevTools/xhvDevToolsContainerComponent/xhvDevToolsContainer.component.js" mode="run"></xhv-script>
+<!--     <div class="d-flex flex-column flex-grow-1 cf-panel pt-5 ">
+        <a href="#" class="closebtn" >&times;</a>
+        <div xoport name="app-panel" id="app-panel" class="d-flex flex-column flex-grow-1 w-100">
+            Allo
+        </div>
+      </div> -->
+      <style>
+          .parent {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background: #000;
+}
+.child {
+    position: absolute;
+   right: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    outline: 1px solid #ccc;
+    background: #ccc;
+}
+      </style>
+      <div class="parent">
+        <div class="child"></div>
+    </div>
+
+</component>
