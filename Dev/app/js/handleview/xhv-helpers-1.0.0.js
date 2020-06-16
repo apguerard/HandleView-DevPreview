@@ -48,3 +48,58 @@ function sendMail(email,subject,msg)
     + "&body=" + encodeURIComponent(msg);
 }
 //END - sendMail()
+
+
+function browserCheck() {
+    var nVer = navigator.appVersion;
+    var nAgt = navigator.userAgent;
+    var browserName = navigator.appName;
+    var fullVersion = "" + parseFloat(navigator.appVersion);
+    var majorVersion = parseInt(navigator.appVersion, 10);
+    var nameOffset, verOffset, ix;
+  
+    if ((verOffset = nAgt.indexOf("MSIE")) != -1) {
+      browserName = "Microsoft Internet Explorer";
+      fullVersion = nAgt.substring(verOffset + 5);
+    }
+    // In most other browsers, "name/version" is at the end of userAgent
+    else if (
+      (nameOffset = nAgt.lastIndexOf(" ") + 1) <
+      (verOffset = nAgt.lastIndexOf("/"))
+    ) {
+      browserName = nAgt.substring(nameOffset, verOffset);
+      fullVersion = nAgt.substring(verOffset + 1);
+      if (browserName.toLowerCase() == browserName.toUpperCase()) {
+        browserName = navigator.appName;
+      }
+    }
+    // trim the fullVersion string at semicolon/space if present
+    if ((ix = fullVersion.indexOf(";")) != -1)
+      fullVersion = fullVersion.substring(0, ix);
+    if ((ix = fullVersion.indexOf(" ")) != -1)
+      fullVersion = fullVersion.substring(0, ix);
+  
+    majorVersion = parseInt("" + fullVersion, 10);
+    if (isNaN(majorVersion)) {
+      fullVersion = "" + parseFloat(navigator.appVersion);
+      majorVersion = parseInt(navigator.appVersion, 10);
+    }
+    var message =
+      "" +
+      "Browser name  = " +
+      browserName +
+      "\n" +
+      "Full version  = " +
+      fullVersion +
+      "\n" +
+      "Major version = " +
+      majorVersion +
+      "\n" +
+      "navigator.appName = " +
+      navigator.appName +
+      "\n" +
+      "navigator.userAgent = " +
+      navigator.userAgent +
+      "\n";
+    alert(message);
+  }
