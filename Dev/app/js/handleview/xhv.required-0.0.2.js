@@ -1,4 +1,5 @@
-/* Copyright (C) 2019 Alain Guérard - All Rights Reserved
+/* Copyright (C) 2021 Bluejacket Software - All Rights Reserved
+   Copyright (C) 2019 Alain Guérard - All Rights Reserved
    You may use, distribute and modify this code under the
    terms of the MIT license.
  
@@ -22,7 +23,11 @@ jQuery.extend(jQuery.expr[':'], {
 /* 
  <summary>
    Attach the VBA eventDispatcher to dispatch HTML event to VBA function.
-   This function is called directly from VBA code when a component load it's HTML template.
+   This function is called directly from VBA code when a component loads its HTML template in the
+   xhvIComponent_subscribeEventDispatcher method of each component class.  It does so by calling
+   ExecuteJS vbNullString, "attachEventDispatcher('" & this.Guid & "')" located in xhvHtmlHelper.bas.
+   It causes the javascript to be executed by inserting it into the DOM of the WB control causing it to execute immediately.
+   It then binds the event to the element by calling the node.bind method passing in the relevant params.
  </summary>
  <param name="guid">the guid of the compoenent</param>
  <returns>No value. But each eventlistener of the component is attached to the eventDispatcher element.</returns> 
@@ -31,14 +36,16 @@ function attachEventDispatcher(guid){
 
     $('[xhv-eventlistener=' + guid  +']' ).each (function(){
 
-    var ev = [];
+    var eventListeners = [];
     var node = $(this);
 
     /* add it in array */
-    ev.push ([this.attributes["xhv-event"].value,this.attributes["xhv-eventhandler"].value, this.attributes["xhv-params"].value]);	
+    eventListeners.push ([this.attributes["xhv-event"].value,this.attributes["xhv-eventhandler"].value, this.attributes["xhv-params"].value]);	
 
-    /* treat array */
-    ev.forEach(function(value){
+    /* treat array 
+       loop through array and bind event handler to elements
+    */
+    eventListeners.forEach(function(value){
         
         var  eventDispatcherId = "#eventdispatcher" + guid
 
@@ -58,8 +65,8 @@ function attachEventDispatcher(guid){
 
 /* 
  <summary>
-   Detach the VBA eventDispatcher that dispatch HTML event to VBA function.
-   This function should be call directly from VBA code when a component dispose function is called.
+   Detach the VBA eventDispatcher from the HTML event.
+   This function should be called directly from VBA code when a component dispose function is called.
  </summary>
  <param name="from">The HTML node from which the search of command should begin.</param>
  <returns>No value. But each command of the component is attached to the eventDispatcher element.</returns> 

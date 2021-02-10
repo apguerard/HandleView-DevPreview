@@ -1,0 +1,6 @@
+<component id="" class="d-inline">
+    <xhv-script url="../views/Shared/BootstrapSubmitButtonView/BootstrapSubmitButton.view.js" mode="load"></xhv-script>
+    <eventdispatcher></eventdispatcher>
+    <button id="{{props:buttonid}}" type="button" class="d-none" xhv-eventlistener xhv-event="click" xhv-eventhandler="{{props:action}}" xhv-params="{{props:frmid}}"></button>
+    <button type="submit" class="{{props:class}}">{{props:text}}</button>
+</component>

@@ -1,0 +1,26 @@
+<topbar-component>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" style="margin-top:6px" xhv-eventlistener xhv-event="click" xhv-eventhandler="navigateHome" xhv-params="one"><img src="../images/HandleView-logo-h.png"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" xhv-eventlistener xhv-event="click" xhv-eventhandler="navigateHome" xhv-params="Two">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Examples
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" xhv-eventlistener xhv-event="click" xhv-eventhandler="navigateButton" xhv-params="">Button component</a>
+          <a class="dropdown-item" href="#" xhv-eventlistener xhv-event="click" xhv-eventhandler="navigateList" xhv-params="">Clients List Demo (Parent-child)</a>
+          <a class="dropdown-item" href="#" xhv-eventlistener xhv-event="click" xhv-eventhandler="navigateForm" xhv-params="" >Manage forms</a>
+        </div>
+      </li>            
+    </ul>
+    </div>
+  </nav>
+</topbar-component>

@@ -1,0 +1,34 @@
+<component id="" class="flex-grow-1">
+    <xhv-script url="../views/HomeView/home.view.js" mode="run"></xhv-script>
+
+    <div class=" p-5">
+        <h2>Welcome Home:{{func:getId}}</h2>
+        
+        <button type="button" xhv-eventlistener xhv-event="click" xhv-eventhandler="ShowMessage" xhv-params="" class="btn btn-primary">Execute JavaScript in VBA</button>
+
+        <xhv-component  xhvtype="buttonComponent" class="btn btn-primary" name="props:id" action="Test"></xhv-component >
+        <xhv-component  xhvtype="buttonComponent" class="btn btn-success" name="Second one" action="hello"></xhv-component >
+
+        <br/>
+        <form xoform id="xo-frm">
+            <div class="form-group">
+              <label for="txtName">Name</label>
+              <input type="text" class="form-control" id="txtName" value="{{props:user.name}}" required>
+              <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else. Wow !</small>
+            </div>
+            <xhv-component  xhvtype="xoBootstrapSubmitButtonComponent" buttonid="btnSubmitfrm" action="saveForm" formid="xo-frm"  text="Danger text submit" class="btn btn-danger" ></xhv-component >
+          </form>
+
+          <br/>
+          <form id="xo-frm-2">
+              <div class="form-group">
+                <label for="txtName">Name</label>
+                <input type="text" class="form-control" id="txtName" value="{{props:user.name}}" required>
+                <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else. Wow !</small>
+              </div>
+              <xhv-component  xhvtype="xoBootstrapSubmitButtonComponent" buttonid="btnSubmitfrm2" action="saveForm" formid="xo-frm-2"  text="xoSubmit" class="btn btn-success" ></xhv-component >
+            </form> 
+            
+          
+    </div>
+</component>

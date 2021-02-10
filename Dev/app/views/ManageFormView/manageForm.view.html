@@ -1,0 +1,73 @@
+<component id="" class="flex-grow-1">
+    <xhv-script url="../components/homeComponent/home.component.js" mode="run"></xhv-script>
+    <div class="p-5">
+        <h2 class="xhv-title d-flex">Manage Form Example</h2>
+        
+        <p class="pt-2">This an example of won to manage form SUBMIT.</p>
+        <p class="pt-2">
+            As the browser try to submit the form to a server, we need to intercept this action and send it to our VBA function.
+            <br/><br/>
+            If you use the xhvBootstrapSubmitButtonComponent, (pretty  long name...) all of this is handle by the component.<br/>
+            If you don't need to  validate anything via javascript, you can  use a standard button instead of a Submit button like in  the first example.
+            <br/><br/>
+            If you need to submit the form and validate in javascript, check the xhvBootstrapSubmitButtonComponent code to see how we do.<br/>
+            Basically, we trap the submit event in javascript, and then call the click event of a hidden button that contains the the event handler we want to call in VBA.
+        </p >       
+
+        <div class="d-flex justify-content-around">
+            <div class="card" style="width: 18rem;text-align: center;">
+                <div class="card-body">
+                <h5 class="card-title">Example 1</h5>
+                <p class="card-text pb-2">Use a standard button.</p>
+                <p class="card-text pb-2">This form just use a standard button.</p>
+                <form xoform id="xo-frm">
+                    <div class="form-group">
+                      <label for="txtName">Id</label>
+                      <input type="text" class="form-control" id="txtId" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtName">Name</label>
+                        <input type="text" class="form-control" id="txtName" value="" required>
+                        <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else. Wow !</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="txtName">Email</label>
+                        <input type="text" class="form-control" id="txtEmail" value="" required>
+                      </div>                                          
+                  </form>                
+                <button type="button" xhv-eventlistener xhv-event="click" xhv-eventhandler="saveViaStandardButton" xhv-params="xo-frm" class="btn btn-primary">Save User</button>
+            </div>
+        </div> 
+            
+        <div class="card" style="width: 18rem;text-align: center;">
+            <div class="card-body">
+            <h5 class="card-title">Example 2</h5>
+            <p class="card-text">Now this is a usefull HandleView component !</p>
+            <p class="card-text pb-2">This button will automatically call the Bootstrap 4 javascript validation routine before submitting your form to your component.</p>
+            <p class="card-text">Try to submit empty value.</p>
+            <form xoform id="xo-frm2">
+                <div class="form-group">
+                    <label for="txtName">Id</label>
+                    <input type="text" class="form-control" id="txtId" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtName">Name</label>
+                        <input type="text" class="form-control" id="txtName" value="" required>
+                        <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else. Wow !</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtName">Email</label>
+                        <input type="email" class="form-control" id="txtEmail" value="" required>
+                    </div>  
+                    <xhv-component  xhvtype="xhvBootstrapSubmitButtonComponent" buttonid="btnSubmitfrm" action="saveForm" formid="xo-frm2"  text="Danger text submit" class="btn btn-danger" ></xhv-component >
+                </form>
+            </div>
+        </div>            
+            
+        </div>
+
+        
+        
+        
+    </div>
+</component>
