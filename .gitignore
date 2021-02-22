@@ -4,3 +4,4 @@
 /Dev/*.log
 /Docs/
 /version.txt
+/**/*.laccdb
