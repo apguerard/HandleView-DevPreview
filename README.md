@@ -12,20 +12,20 @@ Upon startup, the only form in the Access Database launches fully maximized with
 
 Using your favorite Javascript UI Library (JQuery UI, or the newly supoorted Syncfusion controls), you build your components into an in-memory DOM until you have finished building your view.  Applying the in memory DOM to the WB causes it to render in the WB control.
 
-Data can be passed from the VBA controller to the view during the interpolation process and by passing in values using a special 'props' tag.  Any data and control structures are fully assembled as HTML by the VBA controller.  Once the controller is finished constructing the entire page, it renders it in the WB control on the form.
+Data can be passed from the VBA controller to the view during the interpolation process and by passing in values using a special 'props' attribute.  Any data and control structures are fully assembled as HTML by the VBA controller.  Once the controller is finished constructing the entire page, it renders it in the WB control on the form.
 
 Rendering causes the WB to reload it's new DOM and executes any javascript at least once when the document is fully loaded.  Any javascript that you want executed the next time the WB refreshes can be accomplished with special attributes on the custom script tag.
 
 ## What about form submissions?
-Through some javascript intervention, POSTS are intercepted, forms can be validated, and then a simple click event on a hidden button is fired instead of the POST.  This click event (or any DOM event for that matter) can be assigned to a VBA controller method by assigning the method as the event handler that the WB control should execute to handle the event.  The WB passes data back to VBA by way of an event and form data.  VBA dutifully grabs the form data and converts it to parameters that are required by the event handler.
+Through some javascript intervention, POSTS are intercepted, forms can be validated, and then a simple click event on a hidden button is fired instead of the POST.  This click event (or any DOM event for that matter) can be assigned to a VBA controller method by assigning the method as the event handler.  The WB passes data back to VBA by way of an event and form data.  VBA dutifully grabs the form data and converts it to parameters that are required by the event handler.
 
 ## What about navigation?
-At the most fundamental level, navigation is nothing more than raised events with parameters.  Those events could be caused by anyting as simple as a menu button on the Nav bar or as a result of a complex set of instructions called by javascript.  Parameters are passed to the controller in the form of JSON query strings appended to the end of the requested route.
+At the most fundamental level, navigation is nothing more than raised events with parameters.  Those events could be caused by anyting as simple as a menu button on the Nav bar or as a result of a complex set of instructions called by javascript.  Parameters are passed to the controller during nav in the form of JSON query strings appended to the end of the requested route.
 
-When a controller's navigation method is called, the url is parsed for a requested route and for JSON data.  The requested route is then looked up in the routes module to determine which controller to call and which view template it should load.  The nav method then hands off the job to the proper controller method to create any necessary models and build the page.  From there, the whole process described above starts again.
+When a controller's navigation method is called, the url is parsed for a requested route and for JSON data.  The requested route is then looked up in the routes module to determine which controller to call and which view it should build.  From there, the whole process described above starts again.
 
 ## Does xHV use Dependency Injection?
 YES!  While reflection is not available in VBA, classes are regestered against interfaces and can be instantiated either as a Singleton or as Transient.
 
-Please check out the Wiki for details!  (Coming soon...)
+Please check out the Wiki for details.
 
