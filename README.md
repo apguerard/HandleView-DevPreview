@@ -29,3 +29,5 @@ YES!  While reflection is not available in VBA, classes are regestered against i
 
 Please check out the Wiki for details.
 
+*NOTE: You can safely ignore warnings about missing references to [RubberDuck]("https://rubberduckvba.com/") as this is a development time only addin (although you won't be able to compile the demo without it).  It's free and will improve your code!*
+
