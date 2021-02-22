@@ -82,12 +82,12 @@ On Error GoTo ERR_
     ExecuteJS "", "ej.popups.showSpinner(document.getElementById('container'));"
     
     'Wait 5 seconds
-    Dim SngSec As Long
-    SngSec = Timer + 5
+    'Dim SngSec As Long
+    'SngSec = Timer + 5
 
-    Do While Timer < SngSec
-        DoEvents
-    Loop
+    'Do While Timer < SngSec
+    '    DoEvents
+    'Loop
     
     
     'Returns route object with filled params from the requested path
