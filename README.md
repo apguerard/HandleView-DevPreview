@@ -24,5 +24,8 @@ At the most fundamental level, navigation is nothing more than raised events wit
 
 When a controller's navigation method is called, the url is parsed for a requested route and for JSON data.  The requested route is then looked up in the routes module to determine which controller to call and which view template it should load.  The nav method then hands off the job to the proper controller method to create any necessary models and build the page.  From there, the whole process described above starts again.
 
+## Does xHV use Dependency Injection?
+YES!  While reflection is not available in VBA, classes are regestered against interfaces and can be instantiated either as a Singleton or as Transient.
+
 Please check out the Wiki for details!  (Coming soon...)
 
