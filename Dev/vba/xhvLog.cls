@@ -25,9 +25,9 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type TxhvLog
-    enabledLogging  As Boolean
+    EnabledLogging  As Boolean
     enhancements As Scripting.dictionary
-    minimumLogLevel As xhvENUM_LogLevel
+    MinimumLogLevel As xhvENUM_LogLevel
     registeredLoggers As Scripting.dictionary
 End Type
 Private this As TxhvLog
@@ -37,17 +37,17 @@ Private Sub Class_Initialize()
     Set this.registeredLoggers = New Scripting.dictionary
 End Sub
 
-Public Property Get enabledLogging() As Boolean
-    enabledLogging = this.enabledLogging
+Public Property Get EnabledLogging() As Boolean
+    EnabledLogging = this.EnabledLogging
 End Property
-Public Property Let enabledLogging(value As Boolean)
-    this.enabledLogging = value
+Public Property Let EnabledLogging(Value As Boolean)
+    this.EnabledLogging = Value
 End Property
-Public Property Get minimumLogLevel() As xhvENUM_LogLevel
-    minimumLogLevel = this.minimumLogLevel
+Public Property Get MinimumLogLevel() As xhvENUM_LogLevel
+    MinimumLogLevel = this.MinimumLogLevel
 End Property
-Public Property Let minimumLogLevel(value As xhvENUM_LogLevel)
-    this.minimumLogLevel = value
+Public Property Let MinimumLogLevel(Value As xhvENUM_LogLevel)
+    this.MinimumLogLevel = Value
 End Property
 
 
@@ -59,7 +59,7 @@ End Property
 ' @param minimumLogLevelOverride Optional - Pass the minimun level of logging as xhvENUM_LogLevel if you want to
 '            override the global minimum level of logging of the Log system for this specific Logger. Leave empty otherwise.
 '
-Public Sub useLogger(LoggerName As String, Optional loggerProperties As Scripting.dictionary, Optional minimumLogLevelOverride As xhvENUM_LogLevel = -1)
+Public Sub UseLogger(LoggerName As String, Optional loggerProperties As Scripting.dictionary, Optional minimumLogLevelOverride As xhvENUM_LogLevel = -1)
 
 On Error GoTo ERR_
 
@@ -68,9 +68,9 @@ On Error GoTo ERR_
     End If
 
     If minimumLogLevelOverride = -1 Then
-        this.registeredLoggers.Add LoggerName, xhvLoggerFactory.createLogger(LoggerName, loggerProperties, this.minimumLogLevel)
+        this.registeredLoggers.Add LoggerName, xhvLoggerFactory.CreateLogger(LoggerName, loggerProperties, this.MinimumLogLevel)
     Else
-        this.registeredLoggers.Add LoggerName, xhvLoggerFactory.createLogger(LoggerName, loggerProperties, minimumLogLevelOverride)
+        this.registeredLoggers.Add LoggerName, xhvLoggerFactory.CreateLogger(LoggerName, loggerProperties, minimumLogLevelOverride)
     End If
     
 Exit Sub
@@ -91,7 +91,7 @@ End Sub
 '
 ' @param LogEnhancementName Name of the logger enhancement. This name must match te name you used in the the xhvLoggerEnhancementFactory.createLoggerEnhancement() Method Select Case
 '
-Public Sub useLoggerEnhancement(LogEnhancementName As String)
+Public Sub UseLoggerEnhancement(LogEnhancementName As String)
 
 On Error GoTo ERR_
 
@@ -99,7 +99,7 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    Set enhancement = xhvLoggerEnhancementFactory.createLoggerEnhancement(LogEnhancementName)
+    Set enhancement = xhvLoggerEnhancementFactory.CreateLoggerEnhancement(LogEnhancementName)
 
     For Each vKey In this.registeredLoggers.Keys()
         Set logger = this.registeredLoggers(vKey)
@@ -133,10 +133,10 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    If this.enabledLogging Then
+    If this.EnabledLogging Then
         For Each vKey In this.registeredLoggers.Keys()
             Set logger = this.registeredLoggers(vKey)
-            If logger.minimumLogLevel <= TRACE_LEVEL Then
+            If logger.MinimumLogLevel <= TRACE_LEVEL Then
                 logger.LogTrace template, args
             End If
         Next
@@ -168,10 +168,10 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    If this.enabledLogging Then
+    If this.EnabledLogging Then
         For Each vKey In this.registeredLoggers.Keys()
             Set logger = this.registeredLoggers(vKey)
-            If logger.minimumLogLevel <= DEBUG_LEVEL Then
+            If logger.MinimumLogLevel <= DEBUG_LEVEL Then
                 logger.LogDebug template, args
             End If
         Next
@@ -203,10 +203,10 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    If this.enabledLogging Then
+    If this.EnabledLogging Then
         For Each vKey In this.registeredLoggers.Keys()
             Set logger = this.registeredLoggers(vKey)
-            If logger.minimumLogLevel <= INFO_LEVEL Then
+            If logger.MinimumLogLevel <= INFO_LEVEL Then
                 logger.LogInfo template, args
             End If
         Next
@@ -238,10 +238,10 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    If this.enabledLogging Then
+    If this.EnabledLogging Then
         For Each vKey In this.registeredLoggers.Keys()
             Set logger = this.registeredLoggers(vKey)
-            If logger.minimumLogLevel <= WARNING_LEVEL Then
+            If logger.MinimumLogLevel <= WARNING_LEVEL Then
                 logger.LogWarning template, args
             End If
         Next
@@ -273,10 +273,10 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    If this.enabledLogging Then
+    If this.EnabledLogging Then
         For Each vKey In this.registeredLoggers.Keys()
             Set logger = this.registeredLoggers(vKey)
-            If logger.minimumLogLevel <= ERROR_LEVEL Then
+            If logger.MinimumLogLevel <= ERROR_LEVEL Then
                 logger.LogError template, errNumber, errDescription, args
             End If
         Next
@@ -308,10 +308,10 @@ On Error GoTo ERR_
     Dim logger  As xhvILogger
     Dim vKey As Variant
 
-    If this.enabledLogging Then
+    If this.EnabledLogging Then
         For Each vKey In this.registeredLoggers.Keys()
             Set logger = this.registeredLoggers(vKey)
-            If logger.minimumLogLevel <= CRITICAL_LEVEL Then
+            If logger.MinimumLogLevel <= CRITICAL_LEVEL Then
                 logger.LogCritical template, errNumber, errDescription, args
             End If
         Next
@@ -356,7 +356,7 @@ On Error Resume Next
     logEntry = logEntry & "The template string was: '" & template & "'" & vbCrLf
     logEntry = logEntry & "The original error was: [" & errNumber & "] " & errDesc
 
-    Open CurrentProject.path & "\xhvLoggerError.log" For Append As #noFile
+    Open CurrentProject.Path & "\xhvLoggerError.log" For Append As #noFile
     Print #noFile, logEntry
     Close #noFile ' close the file
     

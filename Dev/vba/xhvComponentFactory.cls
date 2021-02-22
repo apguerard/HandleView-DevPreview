@@ -43,11 +43,11 @@ End Sub
 ' @param params List of parameters. Theses parameters come from the requested route in the navigate function.
 ' @param isUsedAsEntryPoint Indicate if the component is a direct child of a RouterPort
 ' @return An xhvComponent Interface component
-Public Function CreateComponent(componentName As String, attributes As Scripting.dictionary, params As Scripting.dictionary, IsUsedAsEntryPoint As Boolean) As xhvIController
+Public Function CreateComponent(ComponentName As String, attributes As Scripting.dictionary, Params As Scripting.dictionary, IsUsedAsEntryPoint As Boolean) As xhvIController
 
 On Error GoTo ERR_
 
-    Select Case UCase(componentName)
+    Select Case UCase(ComponentName)
         
         Case "APPCOMPONENT"
             Set CreateComponent = New AppController
@@ -70,7 +70,7 @@ On Error GoTo ERR_
             Set CreateComponent = New BootstrapSubmitButtonController
             
         Case Else
-            Throw 2013, , "Component '" & componentName & "' cannot be found." & vbCrLf & vbCrLf & "Add '" & componentName & "' in the Select Case of the createComponent() method of xhvComponentFactory class or correct the name of the component in the HTML template."
+            Throw 2013, , "Component '" & ComponentName & "' cannot be found." & vbCrLf & vbCrLf & "Add '" & ComponentName & "' in the Select Case of the createComponent() method of xhvComponentFactory class or correct the name of the component in the HTML template."
     End Select
 
     CreateComponent.IsUsedAsEntryPoint = IsUsedAsEntryPoint
@@ -78,14 +78,14 @@ On Error GoTo ERR_
     If CreateComponent.IsUsedAsEntryPoint Then
         'The attributes could not have not been set in the RenderComponent so fill them here before calling the onAfterInit sub.
             Dim viewAttributes As MSHTML.IHTMLAttributeCollection
-            Set viewAttributes = CreateComponent.view.attributes
+            Set viewAttributes = CreateComponent.View.attributes
             Dim i As Integer
             'Reset  to New  for component UsedAsEntryPoint, because it's a static class
             Set attributes = New Scripting.dictionary
             For i = 0 To viewAttributes.length - 1
                 'Add only those that are not empty
-                If viewAttributes.Item(i).value <> vbNullString Then
-                    attributes.Add viewAttributes.Item(i).nodeName, viewAttributes.Item(i).value
+                If viewAttributes.Item(i).Value <> vbNullString Then
+                    attributes.Add viewAttributes.Item(i).nodeName, viewAttributes.Item(i).Value
                 End If
             Next i
     End If
@@ -95,7 +95,7 @@ On Error GoTo ERR_
         preInitFromCache CreateComponent
     End If
     
-    CreateComponent.Init params
+    CreateComponent.Init Params
     CreateComponent.OnAfterInit attributes
 
 Exit Function
@@ -117,7 +117,7 @@ End Function
 '
 ' @param component The component to initialize from cache
 '
-Private Sub preInitFromCache(ByRef component As xhvIController)
+Private Sub preInitFromCache(ByRef Component As xhvIController)
 
 On Error GoTo ERR_
 
@@ -125,28 +125,28 @@ On Error GoTo ERR_
     Dim cachedComponent As xhvCachedComponent
 
     'Check if component is cached and cache it if needed
-    If Not (this.Cache.Exists(component.NameType)) Then
+    If Not (this.Cache.Exists(Component.NameType)) Then
         Set cachedComponent = New xhvCachedComponent
 
-        cachedComponent.componentName = component.NameType
+        cachedComponent.ComponentName = Component.NameType
 
-        If Trim(component.TemplateString) = vbNullString Then
-            cachedComponent.htmlTemplate = readTemplateFromFile(component.TemplateUrl)
+        If Trim(Component.TemplateString) = vbNullString Then
+            cachedComponent.HtmlTemplate = readTemplateFromFile(Component.TemplateUrl)
         Else
-            cachedComponent.htmlTemplate = component.TemplateString
+            cachedComponent.HtmlTemplate = Component.TemplateString
         End If
         'TODO : In future version: Load CSS and Scripts in memory also
 
-        this.Cache.Add cachedComponent.componentName, cachedComponent
+        this.Cache.Add cachedComponent.ComponentName, cachedComponent
     Else
-        Set cachedComponent = this.Cache(component.NameType)
+        Set cachedComponent = this.Cache(Component.NameType)
     End If
 
     If Configuration("Environment.UseComponentCacheCompressing") Then
         'TODO : In  future version : Remove all unwanted space, line feed, etc.. from the string. Its just not a replace because some space need to be kept!
     End If
 
-    component.TemplateString = cachedComponent.htmlTemplate
+    Component.TemplateString = cachedComponent.HtmlTemplate
 
 
 Exit Sub
@@ -171,16 +171,16 @@ Private Function readTemplateFromFile(templatefileName As String) As String
 
 On Error GoTo ERR_
 
-        Dim adoStream As ADODB.stream
+        Dim adoStream As ADODB.Stream
         Dim pathFileName As String
                
-        pathFileName = Configuration("App.BaseViewsFolder") & templatefileName
+        pathFileName = CurrentProject.Path & Configuration("App.BaseViewsFolder") & templatefileName
         
         If Not (FileExists(pathFileName)) Then
             Throw 2004, Err.source, "The component HTML file template could not be found." & vbCrLf & "File : " & pathFileName
         End If
         
-        Set adoStream = New ADODB.stream
+        Set adoStream = New ADODB.Stream
         adoStream.Charset = "UTF-8"
 
         adoStream.Open

@@ -28,7 +28,7 @@ Private Const MODULE_NAME As String = "xhvLoggerConsole"
 Implements xhvILogger
 
 Private Type TxhvLoggerConsole
-    minimumLogLevel As xhvENUM_LogLevel
+    MinimumLogLevel As xhvENUM_LogLevel
     enhancements As Scripting.dictionary
 End Type
 Private this As TxhvLoggerConsole
@@ -37,15 +37,15 @@ Private Sub Class_Initialize()
     Set this.enhancements = New Scripting.dictionary
 End Sub
 
-Private Property Let xhvILogger_minimumLogLevel(value As xhvENUM_LogLevel)
-    this.minimumLogLevel = value
+Private Property Let xhvILogger_minimumLogLevel(Value As xhvENUM_LogLevel)
+    this.MinimumLogLevel = Value
 End Property
 Private Property Get xhvILogger_minimumLogLevel() As xhvENUM_LogLevel
-    xhvILogger_minimumLogLevel = this.minimumLogLevel
+    xhvILogger_minimumLogLevel = this.MinimumLogLevel
 End Property
 
-Private Property Set xhvILogger_enhancements(value As Scripting.dictionary)
-    Set this.enhancements = value
+Private Property Set xhvILogger_enhancements(Value As Scripting.dictionary)
+    Set this.enhancements = Value
 End Property
 Private Property Get xhvILogger_enhancements() As Scripting.dictionary
     Set xhvILogger_enhancements = this.enhancements
@@ -376,29 +376,29 @@ Private Function getInterpolations(tempStringlate As String) As Collection
 
 On Error GoTo ERR_
 
-    Dim stream As xhvStream
+    Dim Stream As xhvStream
     Dim myChar As String
     Dim tempString As String
     
     Set getInterpolations = New Collection
-    Set stream = New xhvStream
+    Set Stream = New xhvStream
     
-    stream.stream = tempStringlate
+    Stream.Stream = tempStringlate
     
-    myChar = stream.moveNext
+    myChar = Stream.MoveNext
     
     Do While myChar <> vbNullString
 
         If myChar = "{" Then
         
-            If stream.Peak(1) = "{" Then
-                stream.moveNext
+            If Stream.peak(1) = "{" Then
+                Stream.MoveNext
                 tempString = vbNullString
-                myChar = stream.moveNext
+                myChar = Stream.MoveNext
                 Do While myChar <> vbNullString
-                    If myChar = "}" And stream.Peak() = "}" Then Exit Do
+                    If myChar = "}" And Stream.peak() = "}" Then Exit Do
                     tempString = tempString & myChar
-                    myChar = stream.moveNext()
+                    myChar = Stream.MoveNext()
                 Loop
 
                 getInterpolations.Add tempString
@@ -407,11 +407,11 @@ On Error GoTo ERR_
         
         End If
             
-        myChar = stream.moveNext
+        myChar = Stream.MoveNext
         
     Loop
     
-    Set stream = Nothing
+    Set Stream = Nothing
 
 Exit Function
 

@@ -28,8 +28,8 @@ Private Const MODULE_NAME As String = "xhvLoggerTextFile"
 Implements xhvILogger
 
 Private Type TxhvLoggerTextFile
-    minimumLogLevel As xhvENUM_LogLevel
-    fileName As String
+    MinimumLogLevel As xhvENUM_LogLevel
+    FileName As String
     overwriteOnAppOpen As Boolean
     firstWrite As Boolean
     enhancements As Scripting.dictionary
@@ -41,14 +41,14 @@ Private Sub Class_Initialize()
     Set this.enhancements = New Scripting.dictionary
 End Sub
 
-Private Property Let xhvILogger_minimumLogLevel(value As xhvENUM_LogLevel)
-    this.minimumLogLevel = value
+Private Property Let xhvILogger_minimumLogLevel(Value As xhvENUM_LogLevel)
+    this.MinimumLogLevel = Value
 End Property
 Private Property Get xhvILogger_minimumLogLevel() As xhvENUM_LogLevel
-    xhvILogger_minimumLogLevel = this.minimumLogLevel
+    xhvILogger_minimumLogLevel = this.MinimumLogLevel
 End Property
-Private Property Set xhvILogger_enhancements(value As Scripting.dictionary)
-    Set this.enhancements = value
+Private Property Set xhvILogger_enhancements(Value As Scripting.dictionary)
+    Set this.enhancements = Value
 End Property
 Private Property Get xhvILogger_enhancements() As Scripting.dictionary
     Set xhvILogger_enhancements = this.enhancements
@@ -65,7 +65,7 @@ Private Sub xhvILogger_setProperties(loggerProperties As Scripting.IDictionary)
 On Error GoTo ERR_
 
     If loggerProperties.Exists("fileName") Then
-        this.fileName = loggerProperties("fileName")
+        this.FileName = loggerProperties("fileName")
     Else
         Throw 3006, , "The Logger 'xhvLoggerTextFile' needs a property named 'fileName', but it was not provided on initialization. Add this property when initializing the Logger."
     End If
@@ -392,29 +392,29 @@ Private Function getInterpolations(tempStringlate As String) As Collection
 
 On Error GoTo ERR_
 
-    Dim stream As xhvStream
+    Dim Stream As xhvStream
     Dim myChar As String
     Dim tempString As String
     
     Set getInterpolations = New Collection
-    Set stream = New xhvStream
+    Set Stream = New xhvStream
     
-    stream.stream = tempStringlate
+    Stream.Stream = tempStringlate
     
-    myChar = stream.moveNext
+    myChar = Stream.MoveNext
     
     Do While myChar <> vbNullString
 
         If myChar = "{" Then
         
-            If stream.Peak(1) = "{" Then
-                stream.moveNext
+            If Stream.peak(1) = "{" Then
+                Stream.MoveNext
                 tempString = vbNullString
-                myChar = stream.moveNext
+                myChar = Stream.MoveNext
                 Do While myChar <> vbNullString
-                    If myChar = "}" And stream.Peak() = "}" Then Exit Do
+                    If myChar = "}" And Stream.peak() = "}" Then Exit Do
                     tempString = tempString & myChar
-                    myChar = stream.moveNext()
+                    myChar = Stream.MoveNext()
                 Loop
 
                 getInterpolations.Add tempString
@@ -423,11 +423,11 @@ On Error GoTo ERR_
         
         End If
             
-        myChar = stream.moveNext
+        myChar = Stream.MoveNext
         
     Loop
     
-    Set stream = Nothing
+    Set Stream = Nothing
 
 Exit Function
 
@@ -455,14 +455,14 @@ On Error GoTo ERR_
         'Check if we configure the logger to overwrite the file on each startup of the app. If yes, we clean it
         If this.overwriteOnAppOpen Then
             On Error Resume Next
-               Open this.fileName For Output As #noFile
+               Open this.FileName For Output As #noFile
                 If Err.Number <> 0 Then
                     errNum = Err.Number
                     On Error GoTo ERR_
                     If errNum = 55 Then
-                        Throw 3002, , "The file'" & this.fileName & "' is already opened. The " & MODULE_NAME & " cannot write to log file."
+                        Throw 3002, , "The file'" & this.FileName & "' is already opened. The " & MODULE_NAME & " cannot write to log file."
                     ElseIf errNum <> 0 Then
-                        Throw 3003, , "Unexpected error when opening the file '" & this.fileName & "' for logging. The " & MODULE_NAME & " cannot write to log file."
+                        Throw 3003, , "Unexpected error when opening the file '" & this.FileName & "' for logging. The " & MODULE_NAME & " cannot write to log file."
                     End If
                 End If
             
@@ -474,14 +474,14 @@ On Error GoTo ERR_
     End If
     
     On Error Resume Next
-        Open this.fileName For Append As #noFile
+        Open this.FileName For Append As #noFile
         If Err.Number <> 0 Then
             errNum = Err.Number
             On Error GoTo ERR_
                 If errNum = 55 Then
-                    Throw 3002, , "The file'" & this.fileName & "' is already opened. The " & MODULE_NAME & " cannot write to log file."
+                    Throw 3002, , "The file'" & this.FileName & "' is already opened. The " & MODULE_NAME & " cannot write to log file."
                 ElseIf errNum <> 0 Then
-                    Throw 3003, , "Unexpected error when opening the file '" & this.fileName & "' for logging. The " & MODULE_NAME & " cannot write to log file."
+                    Throw 3003, , "Unexpected error when opening the file '" & this.FileName & "' for logging. The " & MODULE_NAME & " cannot write to log file."
                 End If
         End If
     On Error GoTo ERR_

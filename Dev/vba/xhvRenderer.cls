@@ -43,8 +43,8 @@ End Type
 ' @param isUsedAsEntryPoint Indicate if the component is a direct child of a RouterPort.
 ' @return The Component created as an Interface:xhvIController
 '
-Public Function RenderComponent(componentName As String, _
-                                params As Scripting.dictionary, _
+Public Function RenderComponent(ComponentName As String, _
+                                Params As Scripting.dictionary, _
                                 ParentComponent As xhvIController, _
                                 attributes As Scripting.dictionary, _
                                 actualRouterPort As xhvRouterPort, _
@@ -54,7 +54,7 @@ Public Function RenderComponent(componentName As String, _
 
 On Error GoTo ERR_
 
-    Dim component As xhvIController
+    Dim Component As xhvIController
     Dim ChildComponents As MSHTML.IHTMLDOMChildrenCollection
     Dim i As Integer
     Dim j As Integer
@@ -62,46 +62,46 @@ On Error GoTo ERR_
     Dim workingAttributes As MSHTML.IHTMLAttributeCollection
 
     'Create and Initialize the component in the component factory
-    Set component = xhvComponentFactory.CreateComponent(componentName, attributes, params, IsUsedAsEntryPoint)
+    Set Component = xhvComponentFactory.CreateComponent(ComponentName, attributes, Params, IsUsedAsEntryPoint)
 
     'Call the render of the concrete component
-    component.Render
+    Component.Render
     
-    If actualRouterPort.component Is Nothing Then
+    If actualRouterPort.Component Is Nothing Then
         'We are in the main component rendering pass
-        Set actualRouterPort.component = component
+        Set actualRouterPort.Component = Component
     End If
 
-    Dim routerPort As xhvRouterPort
+    Dim RouterPort As xhvRouterPort
     'Collect the child routerPort(s) present in the component, create and put them in the routerPort Tree
-    Set ChildComponents = component.view.querySelectorAll(Syntax.Element.routerportElement)
+    Set ChildComponents = Component.View.querySelectorAll(Syntax.Element.routerportElement)
     
     For i = 0 To ChildComponents.length - 1
-        Set routerPort = New xhvRouterPort
-        routerPort.name = ChildComponents(i).getAttribute("name")
-        Set routerPort.DOMNodeRef = ChildComponents(i)
-        Set routerPort.parentPort = actualRouterPort
-        actualRouterPort.childPorts.Add routerPort, routerPort.name
+        Set RouterPort = New xhvRouterPort
+        RouterPort.Name = ChildComponents(i).getAttribute("name")
+        Set RouterPort.DOMNodeRef = ChildComponents(i)
+        Set RouterPort.ParentPort = actualRouterPort
+        actualRouterPort.ChildPorts.Add RouterPort, RouterPort.Name
     Next i
 
     'Add component in the component Tree
     If ParentComponent Is Nothing Then
         'If the parent is nohting, it's should be the appComponent - the first component created
-        Set ParentComponent = component
+        Set ParentComponent = Component
     Else
-        AddChildComponent ParentComponent, component
+        addChildComponent ParentComponent, Component
     End If
     
     'Set Ancestors list
-    If component.ParentComponent Is Nothing Then
-        component.AncestorsList = component.NameType
+    If Component.ParentComponent Is Nothing Then
+        Component.AncestorsList = Component.NameType
     Else
-        component.AncestorsList = component.ParentComponent.AncestorsList & ";" & component.NameType
+        Component.AncestorsList = Component.ParentComponent.AncestorsList & ";" & Component.NameType
     End If
     
 
     'Render the children component in the actual component
-    Set ChildComponents = component.view.querySelectorAll(Syntax.Element.componentElement)
+    Set ChildComponents = Component.View.querySelectorAll(Syntax.Element.componentElement)
 
     For i = 0 To ChildComponents.length - 1
 
@@ -113,22 +113,22 @@ On Error GoTo ERR_
             Set attributeProperties = New Scripting.dictionary
             For j = 0 To workingAttributes.length - 1
                 'Add only those that are not empty
-                If workingAttributes.Item(j).value <> vbNullString Then
-                    attributeProperties.Add workingAttributes.Item(j).nodeName, workingAttributes.Item(j).value
+                If workingAttributes.Item(j).Value <> vbNullString Then
+                    attributeProperties.Add workingAttributes.Item(j).nodeName, workingAttributes.Item(j).Value
                 End If
             Next j
 
             'Recursive call to the RenderComponent function - Then replace the html node with the component view into the parent component
-            ChildComponents(i).ParentNode.replaceChild RenderComponent(ChildComponents(i).getAttribute(Syntax.Attr.componentTypeAttr), params, component, attributeProperties, actualRouterPort, False).view, ChildComponents(i)
+            ChildComponents(i).ParentNode.replaceChild RenderComponent(ChildComponents(i).getAttribute(Syntax.Attr.componentTypeAttr), Params, Component, attributeProperties, actualRouterPort, False).View, ChildComponents(i)
 
         End If
 
     Next
     
-    ProcessCssDirectives component.view
-    ProcessScriptDirectives component.view
+    processCssDirectives Component.View
+    processScriptDirectives Component.View
 
-    Set RenderComponent = component
+    Set RenderComponent = Component
     
 Exit Function
 
@@ -177,7 +177,7 @@ End Function
 ' @param childComponent Collection of Children Ports
 ' @param parentComponent Pointer to the parent port
 '
-Private Function AddChildComponent(ParentComponent As xhvIController, childComponent As xhvIController) As Boolean
+Private Function addChildComponent(ParentComponent As xhvIController, childComponent As xhvIController) As Boolean
 
     Dim parentTemp As xhvIController
 
@@ -204,7 +204,7 @@ End Function
 ' @return
 ' True if everything went well.
 '
-Private Sub ProcessScriptDirectives(componentView As MSHTML.HTMLGenericElement)
+Private Sub processScriptDirectives(componentView As MSHTML.HTMLGenericElement)
 
 On Error GoTo ERR_
 
@@ -277,7 +277,7 @@ End Sub
 ' True if everything went well.
 '
 
-Private Sub ProcessCssDirectives(poDiv As MSHTML.HTMLGenericElement)
+Private Sub processCssDirectives(poDiv As MSHTML.HTMLGenericElement)
 
 On Error GoTo ERR_
 

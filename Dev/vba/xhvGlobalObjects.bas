@@ -20,7 +20,6 @@ Global Document As MSHTML.HTMLDocument
 Global HV As xhv
 Global OpenedBackendDatabases() As DAO.Database
 
-
 ''
 ' Act as a Global Object and return a configuration value.
 ' This facade to xhvConfigurator.Configurations is used to check globaly if a configuration exists.

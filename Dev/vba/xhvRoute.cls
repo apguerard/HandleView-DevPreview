@@ -24,14 +24,14 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type TxhvRoute
-    componentName As String
-    exitGate As String
+    ComponentName As String
+    ExitGate As String
     Guid As String
     matchPattern As String
-    params As Scripting.dictionary
-    path As String
-    routerPortName As String
-    securityGate As String
+    Params As Scripting.dictionary
+    Path As String
+    RouterPortName As String
+    SecurityGate As String
 End Type
 
 Private this As TxhvRoute
@@ -41,25 +41,25 @@ Private Sub Class_Initialize()
 End Sub
 
 
-Public Property Get componentName() As String
-    componentName = this.componentName
+Public Property Get ComponentName() As String
+    ComponentName = this.ComponentName
 End Property
-Public Property Let componentName(value As String)
-    this.componentName = value
+Public Property Let ComponentName(Value As String)
+    this.ComponentName = Value
 End Property
 
-Public Property Get exitGate() As String
-    exitGate = this.exitGate
+Public Property Get ExitGate() As String
+    ExitGate = this.ExitGate
 End Property
-Public Property Let exitGate(value As String)
-    this.exitGate = value
+Public Property Let ExitGate(Value As String)
+    this.ExitGate = Value
 End Property
 
 Public Property Get Guid() As String
     Guid = this.Guid
 End Property
-Public Property Let Guid(value As String)
-    this.Guid = value
+Public Property Let Guid(Value As String)
+    this.Guid = Value
 End Property
 
 'ReadOnly
@@ -70,32 +70,32 @@ Public Property Get matchPattern() As String
     matchPattern = this.matchPattern
 End Property
 
-Public Property Get params() As Scripting.dictionary
-    Set params = this.params
+Public Property Get Params() As Scripting.dictionary
+    Set Params = this.Params
 End Property
-Public Property Set params(value As Scripting.dictionary)
-    Set this.params = value
-End Property
-
-Public Property Get path() As String
-    path = this.path
-End Property
-Public Property Let path(value As String)
-    this.path = value
+Public Property Set Params(Value As Scripting.dictionary)
+    Set this.Params = Value
 End Property
 
-Public Property Get routerPortName() As String
-    routerPortName = this.routerPortName
+Public Property Get Path() As String
+    Path = this.Path
 End Property
-Public Property Let routerPortName(value As String)
-    this.routerPortName = value
+Public Property Let Path(Value As String)
+    this.Path = Value
 End Property
 
-Public Property Get securityGate() As String
-    securityGate = this.securityGate
+Public Property Get RouterPortName() As String
+    RouterPortName = this.RouterPortName
 End Property
-Public Property Let securityGate(value As String)
-    this.securityGate = value
+Public Property Let RouterPortName(Value As String)
+    this.RouterPortName = Value
+End Property
+
+Public Property Get SecurityGate() As String
+    SecurityGate = this.SecurityGate
+End Property
+Public Property Let SecurityGate(Value As String)
+    this.SecurityGate = Value
 End Property
 
 ''
@@ -108,14 +108,14 @@ Public Function CloneRoute() As xhvRoute
     Dim varKey As Variant
     
     'CloneRoute base type properties
-    route.routerPortName = this.routerPortName
-    route.componentName = this.componentName
-    route.exitGate = this.exitGate
+    route.RouterPortName = this.RouterPortName
+    route.ComponentName = this.ComponentName
+    route.ExitGate = this.ExitGate
     route.Guid = this.Guid
-    route.path = this.path
-    route.securityGate = this.securityGate
+    route.Path = this.Path
+    route.SecurityGate = this.SecurityGate
     'Create a new params dic
-    Set route.params = New Scripting.dictionary
+    Set route.Params = New Scripting.dictionary
 
     Set CloneRoute = route
 
@@ -134,13 +134,13 @@ Dim tempString As String
 Dim sChar As String
 Dim i As Integer
 
-route = this.path
+route = this.Path
 
 For i = 1 To Len(route)
     sChar = Mid(route, i, 1)
     Select Case sChar
         Case "/"
-            If Peak(route, i + 1) <> "/" Then
+            If peak(route, i + 1) <> "/" Then
                 i = i + 1
                 Do While (Mid(route, i, 1) <> "/" And Mid(route, i, 1) <> "&") And i <= Len(route)
                     i = i + 1
@@ -148,14 +148,14 @@ For i = 1 To Len(route)
                 i = i - 1
             Else
                 tempString = tempString & sChar
-                If Peak(route, i + 1) = "/" Then
+                If peak(route, i + 1) = "/" Then
                     i = i + 1
                     tempString = tempString & Mid(route, i, 1)
                 End If
             End If
         Case "&"
             tempString = tempString & sChar
-            If Peak(route, i + 1) = "&" Then
+            If peak(route, i + 1) = "&" Then
                 i = i + 1
                 tempString = tempString & Mid(route, i, 1)
             End If
@@ -179,8 +179,8 @@ ERR_:
     End If
 End Function
 
-Private Function Peak(tempString As String, position As Integer) As String
-    Peak = Mid(tempString, position, 1)
+Private Function peak(tempString As String, position As Integer) As String
+    peak = Mid(tempString, position, 1)
 End Function
 
 

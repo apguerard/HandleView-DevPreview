@@ -34,42 +34,42 @@ Public Property Get CurrentPosition() As Integer
     CurrentPosition = position
 End Property
 
-Public Property Let stream(value As String)
-    myStream = value
+Public Property Let Stream(Value As String)
+    myStream = Value
     position = 0
     length = Len(myStream)
 End Property
 
 
-Public Function Peak(Optional PeakSize As Integer = 1) As String
+Public Function peak(Optional PeakSize As Integer = 1) As String
 
     If position + PeakSize <= length Then
-        Peak = Mid(myStream, position + 1, PeakSize)
+        peak = Mid(myStream, position + 1, PeakSize)
     Else
-        Peak = vbNullString
+        peak = vbNullString
     End If
 
 End Function
 
 
-Public Function moveNext() As String
+Public Function MoveNext() As String
 
     position = position + 1
     If position <= length Then
-        moveNext = Mid(myStream, position, 1)
+        MoveNext = Mid(myStream, position, 1)
     Else
-        moveNext = vbNullString
+        MoveNext = vbNullString
     End If
     
 End Function
 
 
-Public Function currentChar() As String
+Public Function CurrentChar() As String
     
     If position <= length Then
-        currentChar = Mid(myStream, position, 1)
+        CurrentChar = Mid(myStream, position, 1)
     Else
-        currentChar = vbNullString
+        CurrentChar = vbNullString
     End If
 
 End Function

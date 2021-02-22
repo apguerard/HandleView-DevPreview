@@ -24,12 +24,12 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type TxhvPort
-    childPorts As Collection
-    component As xhvIController
+    ChildPorts As Collection
+    Component As xhvIController
     DOMNodeRef As MSHTML.HTMLGenericElement
     Guid As String
-    name As String
-    parentPort As xhvRouterPort
+    Name As String
+    ParentPort As xhvRouterPort
 End Type
 
 Private this  As TxhvPort
@@ -37,28 +37,28 @@ Private this  As TxhvPort
 
 Private Sub Class_Initialize()
     this.Guid = NewGUID()
-    Set this.childPorts = New Collection
+    Set this.ChildPorts = New Collection
 End Sub
 
-Public Property Get childPorts() As Collection
-    Set childPorts = this.childPorts
+Public Property Get ChildPorts() As Collection
+    Set ChildPorts = this.ChildPorts
 End Property
-Public Property Set childPorts(value As Collection)
-    Set this.childPorts = value
+Public Property Set ChildPorts(Value As Collection)
+    Set this.ChildPorts = Value
 End Property
 
-Public Property Get component() As xhvIController
-    Set component = this.component
+Public Property Get Component() As xhvIController
+    Set Component = this.Component
 End Property
-Public Property Set component(value As xhvIController)
-    Set this.component = value
+Public Property Set Component(Value As xhvIController)
+    Set this.Component = Value
 End Property
 
 Public Property Get DOMNodeRef() As MSHTML.HTMLGenericElement
     Set DOMNodeRef = this.DOMNodeRef
 End Property
-Public Property Set DOMNodeRef(value As MSHTML.HTMLGenericElement)
-    Set this.DOMNodeRef = value
+Public Property Set DOMNodeRef(Value As MSHTML.HTMLGenericElement)
+    Set this.DOMNodeRef = Value
 End Property
 
 
@@ -67,16 +67,16 @@ Public Property Get Guid() As String
     Guid = this.Guid
 End Property
 
-Public Property Get name() As String
-    name = this.name
+Public Property Get Name() As String
+    Name = this.Name
 End Property
-Public Property Let name(value As String)
-    this.name = value
+Public Property Let Name(Value As String)
+    this.Name = Value
 End Property
 
-Public Property Get parentPort() As xhvRouterPort
-    Set parentPort = this.parentPort
+Public Property Get ParentPort() As xhvRouterPort
+    Set ParentPort = this.ParentPort
 End Property
-Public Property Set parentPort(value As xhvRouterPort)
-    Set this.parentPort = value
+Public Property Set ParentPort(Value As xhvRouterPort)
+    Set this.ParentPort = Value
 End Property

@@ -41,8 +41,8 @@ End Function
 '
 ' @param inPath String representing fully qualified file and path
 ' @return file name as String
-Public Function fileName(ByVal inPath As String) As String
-    fileName = Mid(inPath, InStrRev(inPath, "\") + 1)
+Public Function FileName(ByVal inPath As String) As String
+    FileName = Mid(inPath, InStrRev(inPath, "\") + 1)
 End Function
 
 ''
@@ -87,9 +87,9 @@ End Function
 ' @param fileName Path/To/File
 ' @return True/False
 '
-Public Function FileExists(fileName As String) As Boolean
+Public Function FileExists(FileName As String) As Boolean
     
-    If Len(Dir(fileName)) = 0 Then
+    If Len(Dir(FileName)) = 0 Then
         FileExists = False
     Else
         FileExists = True

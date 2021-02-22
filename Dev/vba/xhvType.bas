@@ -20,16 +20,16 @@ Option Explicit
 '
 Public Type TxhvIController
     AncestorsList As String
-    componentObject As Object
+    ComponentObject As Object
     ChildComponents As Collection
     IsUsedAsEntryPoint As Boolean
     Guid As String
     NameType As String
     ParentComponent As xhvIController
-    routerPort As xhvRouterPort
+    RouterPort As xhvRouterPort
     TemplateString As String
     TemplateUrl As String
-    view As MSHTML.HTMLGenericElement
+    View As MSHTML.HTMLGenericElement
     WrapperElementType As String
 End Type
 

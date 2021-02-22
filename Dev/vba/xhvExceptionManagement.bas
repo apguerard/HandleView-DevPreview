@@ -17,12 +17,12 @@ Option Explicit
 
 Public Function ReThrow()
 
-    Err.Raise Err.Number, Err.source, Err.Description
+    Err.Raise Err.Number, Err.source, Err.Description & " - Rethrown"
 
 End Function
 
 Public Function Throw(errNumber As Long, Optional errSource As String, Optional errDescription As String)
-
+    
     Err.Raise errNumber, errSource, errDescription
 
 End Function

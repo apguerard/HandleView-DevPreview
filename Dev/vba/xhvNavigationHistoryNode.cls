@@ -35,29 +35,29 @@ Private this As TxhvNavigationHistoryNode
 Public Property Get NextNode() As xhvNavigationHistoryNode
     Set NextNode = this.NextNode
 End Property
-Public Property Set NextNode(value As xhvNavigationHistoryNode)
-    Set this.NextNode = value
+Public Property Set NextNode(Value As xhvNavigationHistoryNode)
+    Set this.NextNode = Value
 End Property
 
 Public Property Get PrevNode() As xhvNavigationHistoryNode
     Set PrevNode = this.PrevNode
 End Property
-Public Property Set PrevNode(value As xhvNavigationHistoryNode)
-    Set this.PrevNode = value
+Public Property Set PrevNode(Value As xhvNavigationHistoryNode)
+    Set this.PrevNode = Value
 End Property
 
 Public Property Get NodeValue() As xhvRoute
     Set NodeValue = this.NodeValue
 End Property
-Public Property Set NodeValue(value As xhvRoute)
-    Set this.NodeValue = value
+Public Property Set NodeValue(Value As xhvRoute)
+    Set this.NodeValue = Value
 End Property
 
 Public Property Get NodeValueTarget() As String
     NodeValueTarget = this.NodeValueTarget
 End Property
-Public Property Let NodeValueTarget(value As String)
-    this.NodeValueTarget = value
+Public Property Let NodeValueTarget(Value As String)
+    this.NodeValueTarget = Value
 End Property
 
 

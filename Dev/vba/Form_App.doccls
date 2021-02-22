@@ -107,6 +107,3 @@ Private Sub Form_Close()
     End
 End Sub
 
-Private Sub Form_ViewChange(ByVal Reason As Long)
-MsgBox "wb.OnViewChange"
-End Sub

@@ -26,28 +26,28 @@ Option Compare Database
 
 Private Type TDemoClientModel
     Id As Long
-    name As String
-    email As String
+    Name As String
+    Email As String
 End Type
 Private this As TDemoClientModel
 
 Public Property Get Id() As Long
     Id = this.Id
 End Property
-Public Property Let Id(value As Long)
-    this.Id = value
+Public Property Let Id(Value As Long)
+    this.Id = Value
 End Property
 
-Public Property Get name() As String
-    name = this.name
+Public Property Get Name() As String
+    Name = this.Name
 End Property
-Public Property Let name(value As String)
-    this.name = value
+Public Property Let Name(Value As String)
+    this.Name = Value
 End Property
 
-Public Property Get email() As String
-    email = this.email
+Public Property Get Email() As String
+    Email = this.Email
 End Property
-Public Property Let email(value As String)
-    this.email = value
+Public Property Let Email(Value As String)
+    this.Email = Value
 End Property

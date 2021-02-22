@@ -39,22 +39,22 @@ Private this As TxhvRouter
 Public Property Get rootComponent() As xhvIController
     Set rootComponent = this.rootComponent
 End Property
-Public Property Set rootComponent(value As xhvIController)
-    Set this.rootComponent = value
+Public Property Set rootComponent(Value As xhvIController)
+    Set this.rootComponent = Value
 End Property
 
 Public Property Get rootRouterPort() As xhvRouterPort
     Set rootRouterPort = this.rootRouterPort
 End Property
-Public Property Set rootRouterPort(value As xhvRouterPort)
-    Set this.rootRouterPort = value
+Public Property Set rootRouterPort(Value As xhvRouterPort)
+    Set this.rootRouterPort = Value
 End Property
 
 Public Property Get routes() As Collection
     Set routes = this.routes
 End Property
-Public Property Set routes(value As Collection)
-    Set this.routes = value
+Public Property Set routes(Value As Collection)
+    Set this.routes = Value
 End Property
 
 Private Sub Class_Initialize()
@@ -68,15 +68,15 @@ End Sub
 ' @param backingAction Boolean that tells if it is a backing action.
 '             NOTE: YOU SHOULD ALWAYS LEAVE THIS PARAMETER EMPTY. IT USED IN AUTOMATIC BACKING FUNCTION
 ' @return N/A. RouterPort and Components are created an displayed in the UI
-Public Sub Navigate(path As String, Optional backingAction As Boolean = False)
+Public Sub Navigate(Path As String, Optional backingAction As Boolean = False)
 
 On Error GoTo ERR_
     
     Dim route As xhvRoute
     Dim configuredRoutes As Collection
-    Dim routerPort As xhvRouterPort
+    Dim RouterPort As xhvRouterPort
     Dim ParentComponent As xhvIController
-    Dim component As xhvIController
+    Dim Component As xhvIController
     
     'Turn on the spinner
     ExecuteJS "", "ej.popups.showSpinner(document.getElementById('container'));"
@@ -91,31 +91,31 @@ On Error GoTo ERR_
     
     
     'Returns route object with filled params from the requested path
-    Set configuredRoutes = getConfiguredRoutesfromString(path)
+    Set configuredRoutes = getConfiguredRoutesfromString(Path)
 
     'Treat all chained configuredRoutes one after another as separated route
     For Each route In configuredRoutes
         
         'Select the RouterPort in the routerPort Tree
         'Note:The routerPorts Tree is manage in the renderer
-        Set routerPort = getRouterPort(this.rootRouterPort, route.routerPortName, False)
-        If routerPort Is Nothing Then
-            Throw 2022, , "The RouterPort named: '" & route.routerPortName & "' does  not exist in the Router's RouterPort Tree."
+        Set RouterPort = getRouterPort(this.rootRouterPort, route.RouterPortName, False)
+        If RouterPort Is Nothing Then
+            Throw 2022, , "The RouterPort named: '" & route.RouterPortName & "' does  not exist in the Router's RouterPort Tree."
         End If
                
-        If Not (routerPort.component Is Nothing) Then
+        If Not (RouterPort.Component Is Nothing) Then
             'Delete the actual Port's component in ComponentTree
-            removeComponentFromTree routerPort.component.Guid
+            removeComponentFromTree RouterPort.Component.Guid
             'Delete the actual Port's component reference, because it will be replace
-            Set routerPort.component = Nothing
+            Set RouterPort.Component = Nothing
         End If
         
         'Delete children RouterPorts of the actual RouterPort
-        removeChildRouterPorts routerPort
+        removeChildRouterPorts RouterPort
         
         'Find the parentComponent
-        If Not (routerPort.parentPort Is Nothing) Then
-            Set ParentComponent = routerPort.parentPort.component
+        If Not (RouterPort.ParentPort Is Nothing) Then
+            Set ParentComponent = RouterPort.ParentPort.Component
         Else
             Set ParentComponent = this.rootComponent
         End If
@@ -123,14 +123,14 @@ On Error GoTo ERR_
         'Render the component
         Dim tmpAttributes As New Scripting.dictionary '<-- Create a temporary attributes dic for component  directly in the port that will be filled in the componentFactory
         
-        Set component = xhvRenderer.RenderComponent(route.componentName, route.params, ParentComponent, tmpAttributes, routerPort, True)
+        Set Component = xhvRenderer.RenderComponent(route.ComponentName, route.Params, ParentComponent, tmpAttributes, RouterPort, True)
         
-        If component Is Nothing Then
-            Throw 2023, , "The component '" & route.componentName & "' could not be rendered by the framework."
+        If Component Is Nothing Then
+            Throw 2023, , "The component '" & route.ComponentName & "' could not be rendered by the framework."
         End If
         
         If this.rootComponent Is Nothing Then
-            Set this.rootComponent = component
+            Set this.rootComponent = Component
         End If
         
         
@@ -139,12 +139,12 @@ On Error GoTo ERR_
         Dim node As MSHTML.IHTMLDOMNode
         Dim nextSibling As MSHTML.IHTMLDOMNode
 
-        Set node = routerPort.DOMNodeRef.firstChild
+        Set node = RouterPort.DOMNodeRef.firstChild
 
         Do While Not (node Is Nothing)
             If node.nodeType = 1 Then
                 On Error Resume Next
-                If UCase(node.attributes("component").value) <> vbNullString Then
+                If UCase(node.attributes("component").Value) <> vbNullString Then
                     Set nextSibling = node
                 End If
                 On Error GoTo 0
@@ -155,15 +155,15 @@ On Error GoTo ERR_
         Loop
 
         If nextSibling Is Nothing Then
-            routerPort.DOMNodeRef.InsertBefore component.view, Null
+            RouterPort.DOMNodeRef.InsertBefore Component.View, Null
         Else
             nextSibling.ParentNode.removeChild nextSibling
-            routerPort.DOMNodeRef.InsertBefore component.view, Null
+            RouterPort.DOMNodeRef.InsertBefore Component.View, Null
         End If
         'END - Add the component as a child of the routerPort
         
-        component.AfterInsertIntoDOM
-        raiseAfterParentsRendered component
+        Component.AfterInsertIntoDOM
+        raiseAfterParentsRendered Component
         
     Next route
     
@@ -191,15 +191,15 @@ End Sub
 '
 Private Sub raiseAfterParentsRendered(rootComponent As xhvIController)
 
-    Dim component As xhvIController
+    Dim Component As xhvIController
 
     If Not (rootComponent Is Nothing) Then
 
         If Not (rootComponent.ChildComponents Is Nothing) Then
-            For Each component In rootComponent.ChildComponents
-                component.AfterParentInsertedIntoDOM
+            For Each Component In rootComponent.ChildComponents
+                Component.AfterParentInsertedIntoDOM
                 'Recursive call
-                raiseAfterParentsRendered component
+                raiseAfterParentsRendered Component
             Next
         End If
         
@@ -214,15 +214,15 @@ End Sub
 '
 Private Function subscribeAllEventDispatchers(rootComponent As xhvIController) As Boolean
 
-    Dim component As xhvIController
+    Dim Component As xhvIController
 
     If Not (rootComponent Is Nothing) Then
 
         rootComponent.SubscribeEventDispatcher
 
         If Not (rootComponent.ChildComponents Is Nothing) Then
-            For Each component In rootComponent.ChildComponents
-                subscribeAllEventDispatchers component
+            For Each Component In rootComponent.ChildComponents
+                subscribeAllEventDispatchers Component
             Next
         End If
         
@@ -236,7 +236,7 @@ End Function
 '
 ' @param path The string containing the requested path
 ' @return A collection of matching configured routes or nothing if no match found.
-Private Function getConfiguredRoutesfromString(path As String) As Collection
+Private Function getConfiguredRoutesfromString(Path As String) As Collection
 
 On Error GoTo ERR_
 
@@ -247,7 +247,7 @@ On Error GoTo ERR_
     Set getConfiguredRoutesfromString = New Collection
 
     'Separate the siblings route
-    siblingPaths = Split(path, "||")
+    siblingPaths = Split(Path, "||")
 
     For i = 0 To UBound(siblingPaths)
         
@@ -255,7 +255,7 @@ On Error GoTo ERR_
         
         If Not (route Is Nothing) Then
             'Extract the param from the json string and put it the CloneRouted Route
-            Set route.params = extractParamsFromRoute(Trim(siblingPaths(i)))
+            Set route.Params = extractParamsFromRoute(Trim(siblingPaths(i)))
             'Add the matching route
             getConfiguredRoutesfromString.Add route
         Else
@@ -288,14 +288,14 @@ End Function
 '
 ' @param path Complete path requested in the navigate function
 ' @return Dictionary of parameters
-Private Function extractParamsFromRoute(path) As Scripting.dictionary
+Private Function extractParamsFromRoute(Path) As Scripting.dictionary
 
 On Error GoTo ERR_
 
     Dim jsonString As String
     Dim stringArray() As String
     
-    stringArray = Split(path, "/")
+    stringArray = Split(Path, "/")
     If UBound(stringArray) > 0 Then
         jsonString = stringArray(1)
         Set extractParamsFromRoute = ParseJson(jsonString)
@@ -324,22 +324,22 @@ Private Sub removeComponentFromTree(componentGuid As String)
 
 On Error GoTo ERR_
    
-    Dim component As xhvIController
+    Dim Component As xhvIController
 
-    Set component = getComponentFromTree(this.rootComponent, componentGuid)
+    Set Component = getComponentFromTree(this.rootComponent, componentGuid)
 
-    If Not (component Is Nothing) Then
+    If Not (Component Is Nothing) Then
                 
         'Delete all child components in  the tree
-        removeChildComponents component
+        removeChildComponents Component
         
-        If Not (component.ParentComponent Is Nothing) Then
+        If Not (Component.ParentComponent Is Nothing) Then
             
-            component.ParentComponent.ChildComponents.Remove component.Guid
+            Component.ParentComponent.ChildComponents.Remove Component.Guid
             
         End If
         
-        component.Dispose
+        Component.Dispose
              
     End If
     
@@ -367,14 +367,14 @@ Private Sub removeChildComponents(ParentComponent As xhvIController)
 
 On Error GoTo ERR_
 
-    Dim component As xhvIController
+    Dim Component As xhvIController
 
     If Not (ParentComponent.ChildComponents Is Nothing) Then
-        For Each component In ParentComponent.ChildComponents
+        For Each Component In ParentComponent.ChildComponents
             'Recursive call
-            removeChildComponents component
+            removeChildComponents Component
             
-            component.Dispose
+            Component.Dispose
             
         Next
     End If
@@ -402,7 +402,7 @@ Private Function getComponentFromTree(rootComponent As xhvIController, component
 
 On Error GoTo ERR_
 
-    Dim component As xhvIController
+    Dim Component As xhvIController
     
     If Not (rootComponent Is Nothing) Then
         If rootComponent.Guid = componentGuid Then
@@ -410,8 +410,8 @@ On Error GoTo ERR_
             Exit Function
         Else
             If Not (rootComponent.ChildComponents Is Nothing) Then
-                For Each component In rootComponent.ChildComponents
-                    Set getComponentFromTree = getComponentFromTree(component, componentGuid)
+                For Each Component In rootComponent.ChildComponents
+                    Set getComponentFromTree = getComponentFromTree(Component, componentGuid)
                 Next
             End If
         End If
@@ -442,16 +442,16 @@ Private Function getRouterPort(rootComponent As xhvRouterPort, portName As Strin
 
 On Error GoTo ERR_
 
-    Dim routerPort As xhvRouterPort
+    Dim RouterPort As xhvRouterPort
     
     If Not (rootComponent Is Nothing) Then
-        If rootComponent.name = portName Then
+        If rootComponent.Name = portName Then
             Set getRouterPort = rootComponent
             found = True
             Exit Function
         Else
-            For Each routerPort In rootComponent.childPorts
-                Set getRouterPort = getRouterPort(routerPort, portName, False)
+            For Each RouterPort In rootComponent.ChildPorts
+                Set getRouterPort = getRouterPort(RouterPort, portName, False)
                 If found Then Exit Function
             Next
         End If
@@ -471,22 +471,22 @@ ERR_:
 End Function
 
 
-Private Sub removeChildRouterPorts(ByRef routerPort As xhvRouterPort)
+Private Sub removeChildRouterPorts(ByRef RouterPort As xhvRouterPort)
 
     Dim rp As xhvRouterPort
     
-    For Each rp In routerPort.childPorts
+    For Each rp In RouterPort.ChildPorts
         removeChildRouterPorts rp
         
-        Set rp.component = Nothing
+        Set rp.Component = Nothing
         Set rp.DOMNodeRef = Nothing
-        Set rp.parentPort = Nothing
-        Set rp.childPorts = Nothing
+        Set rp.ParentPort = Nothing
+        Set rp.ChildPorts = Nothing
         Set rp = Nothing
         
     Next
     
-    Set routerPort.childPorts = New Collection
+    Set RouterPort.ChildPorts = New Collection
 
 
 End Sub
@@ -548,7 +548,7 @@ On Error GoTo ERR_
         sChar = Mid(route, i, 1)
         Select Case sChar
             Case "/"
-                If Peak(route, i + 1) <> "/" Then
+                If peak(route, i + 1) <> "/" Then
                     i = i + 1
                     Do While (Mid(route, i, 1) <> "/" And Mid(route, i, 1) <> "&") And i <= Len(route)
                         i = i + 1
@@ -556,14 +556,14 @@ On Error GoTo ERR_
                     i = i - 1
                 Else
                     tempString = tempString & sChar
-                    If Peak(route, i + 1) = "/" Then
+                    If peak(route, i + 1) = "/" Then
                         i = i + 1
                         tempString = tempString & Mid(route, i, 1)
                     End If
                 End If
             Case "&"
                 tempString = tempString & sChar
-                If Peak(route, i + 1) = "&" Then
+                If peak(route, i + 1) = "&" Then
                     i = i + 1
                     tempString = tempString & Mid(route, i, 1)
                 End If
@@ -594,17 +594,17 @@ End Function
 ' @param position The position we want to peak.
 ' @param iPeakBy The number of char we want to peak. If not provided, 1 is used by default.
 ' @return A single char at the position position or multiple char starting at position position with a lenth of iPeakBy
-Private Function Peak(inString As String, position As Integer, Optional iPeakBy = 1) As String
+Private Function peak(inString As String, position As Integer, Optional iPeakBy = 1) As String
 
     On Error GoTo ERR_
 
-    Peak = Mid(inString, position, iPeakBy)
+    peak = Mid(inString, position, iPeakBy)
 
 Finally:
 
 Exit Function
 ERR_:
-    Peak = vbNullString
+    peak = vbNullString
     GoTo Finally
 End Function
 

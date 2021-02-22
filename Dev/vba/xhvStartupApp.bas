@@ -39,7 +39,7 @@ On Error GoTo ERR_
 
     'Request, load and wait for the App Host HTML file to be ready (Base htmlfile)
     'The required format is : ="Path" (with the ")
-    WB.ControlSource = "=""" & (Configuration("App.StartupHostPath") & Configuration("App.StartupHostFile")) & """"
+    WB.ControlSource = "=""" & CurrentProject.Path & (Configuration("App.StartupHostPath") & Configuration("App.StartupHostFile")) & """"
     Do While WB.ReadyState <> READYSTATE_COMPLETE
         DoEvents
     Loop
@@ -78,7 +78,7 @@ On Error GoTo ERR_
     Set xhvRouter.rootRouterPort = New xhvRouterPort
     
     With xhvRouter.rootRouterPort
-        .name = Configuration("App.RootRouterPort")
+        .Name = Configuration("App.RootRouterPort")
         If IsNull(Document.documentElement.querySelector(Syntax.Element.routerportElement & "[name='" & Configuration("App.RootRouterPort") & "']")) Then
             Throw 2001, Err.source, "The <" & Syntax.Element.routerportElement & "> name=""" & Configuration("App.RootRouterPort") & " </" & Syntax.Element.routerportElement & "> code cannot be found in the HostFile."
         Else

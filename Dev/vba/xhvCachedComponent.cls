@@ -26,43 +26,43 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type TxhvCachedComponent
-    componentName As String
-    css As Scripting.dictionary
-    htmlTemplate As String
-    scripts As Scripting.dictionary
+    ComponentName As String
+    Css As Scripting.dictionary
+    HtmlTemplate As String
+    Scripts As Scripting.dictionary
 End Type
 
 Private this As TxhvCachedComponent
 
 Private Sub Class_Initialize()
-    Set this.scripts = New Scripting.dictionary
-    Set this.css = New Scripting.dictionary
+    Set this.Scripts = New Scripting.dictionary
+    Set this.Css = New Scripting.dictionary
 End Sub
 
-Public Property Get componentName() As String
-    componentName = this.componentName
+Public Property Get ComponentName() As String
+    ComponentName = this.ComponentName
 End Property
-Public Property Let componentName(value As String)
-    this.componentName = value
-End Property
-
-Public Property Get css() As Scripting.dictionary
-    Set css = this.css
-End Property
-Public Property Set css(value As Scripting.dictionary)
-    Set this.css = value
+Public Property Let ComponentName(Value As String)
+    this.ComponentName = Value
 End Property
 
-Public Property Get htmlTemplate() As String
-    htmlTemplate = this.htmlTemplate
+Public Property Get Css() As Scripting.dictionary
+    Set Css = this.Css
 End Property
-Public Property Let htmlTemplate(value As String)
-    this.htmlTemplate = value
+Public Property Set Css(Value As Scripting.dictionary)
+    Set this.Css = Value
 End Property
 
-Public Property Get scripts() As Scripting.dictionary
-    Set scripts = this.scripts
+Public Property Get HtmlTemplate() As String
+    HtmlTemplate = this.HtmlTemplate
 End Property
-Public Property Set scripts(value As Scripting.dictionary)
-    Set this.scripts = value
+Public Property Let HtmlTemplate(Value As String)
+    this.HtmlTemplate = Value
+End Property
+
+Public Property Get Scripts() As Scripting.dictionary
+    Set Scripts = this.Scripts
+End Property
+Public Property Set Scripts(Value As Scripting.dictionary)
+    Set this.Scripts = Value
 End Property

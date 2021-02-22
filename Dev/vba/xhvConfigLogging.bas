@@ -45,32 +45,32 @@ On Error GoTo ERR_
     
     'Get configuration for the log system
     '=
-    xhvLog.enabledLogging = Configuration("App.EnabledLogging")
-    xhvLog.minimumLogLevel = Configuration("App.MinimumLogLevel")
+    xhvLog.EnabledLogging = Configuration("App.EnabledLogging")
+    xhvLog.MinimumLogLevel = Configuration("App.MinimumLogLevel")
     
     ' Register your logger below this line -->
     '
     'This section only registers logging to console if we are in the DEV environment - You can remove if you want...
     If Configuration("Environment.RunningEnvironment") = "DEV" Then
-        xhvLog.useLogger "xhvLoggerConsole", , TRACE_LEVEL '<-- override global minimumLogLevel for this logger
+        xhvLog.UseLogger "xhvLoggerConsole", , TRACE_LEVEL '<-- override global minimumLogLevel for this logger
     End If
     
     'This part enables the TextFile Logger - Comment it out if you don't want to use it.
 
     'xhvLoggerTextFile needs some properties to work.
     Dim props As New Scripting.dictionary
-    props.Add "fileName", CurrentProject.path & "\xhv.log"
+    props.Add "fileName", CurrentProject.Path & "\xhv.log"
     props.Add "overwriteOnAppOpen", False
-    xhvLog.useLogger "xhvLoggerTextFile", props
+    xhvLog.UseLogger "xhvLoggerTextFile", props
 
     
     'This part enables the Json Logger - Comment it out if you don't want to use it.
 
     'xhvLoggerJson needs some properties to work.
     Dim propsJson As New Scripting.dictionary
-    propsJson.Add "fileName", CurrentProject.path & "\xhv.json"
+    propsJson.Add "fileName", CurrentProject.Path & "\xhv.json"
     propsJson.Add "overwriteOnAppOpen", False
-    xhvLog.useLogger "xhvLoggerJson", propsJson
+    xhvLog.UseLogger "xhvLoggerJson", propsJson
 
     
     
@@ -82,7 +82,7 @@ On Error GoTo ERR_
     'NOTE: Logger added after the logger enhancements are added won't inherit these enhancements.
     '
     
-    xhvLog.useLoggerEnhancement "xhvLogEnhancementWithUserContext"
+    xhvLog.UseLoggerEnhancement "xhvLogEnhancementWithUserContext"
     
     
     

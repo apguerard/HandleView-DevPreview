@@ -40,8 +40,8 @@ Option Explicit
 ' @return The object returned by the calling of the factory function.
 '
 
-Public Function getServiceFromFactory(factoryFunction As String) As Object
-    Set getServiceFromFactory = CallByName(Me, factoryFunction, VbMethod)
+Public Function GetServiceFromFactory(factoryFunction As String) As Object
+    Set GetServiceFromFactory = CallByName(Me, factoryFunction, VbMethod)
 End Function
 
 
@@ -55,11 +55,11 @@ End Function
 '
 ' @param className Name of the class of the service
 ' @return Object of a concrete class.
-Public Function getServiceFromclassName(className As String) As Object
+Public Function GetServiceFromclassName(className As String) As Object
 
     Select Case className
         Case "DemoClientService"
-            Set getServiceFromclassName = New DemoClientService
+            Set GetServiceFromclassName = New DemoClientService
     End Select
 
 End Function

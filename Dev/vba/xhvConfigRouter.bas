@@ -32,11 +32,11 @@ Public Sub ConfigureRoutes()
 
     'Typical Basic App route
     Set route = New xhvRoute
-    route.path = "app"
-    route.routerPortName = "app-root"
-    route.componentName = "AppComponent"
-    route.exitGate = vbNullString
-    route.securityGate = vbNullString
+    route.Path = "app"
+    route.RouterPortName = "app-root"
+    route.ComponentName = "AppComponent"
+    route.ExitGate = vbNullString
+    route.SecurityGate = vbNullString
     routes.Add route
 
 
@@ -44,43 +44,43 @@ Public Sub ConfigureRoutes()
     '-----------------------------
 
   Set route = New xhvRoute
-  route.path = "home"
-  route.routerPortName = "content"
-  route.componentName = "HomeComponent"
-  route.exitGate = vbNullString
-  route.securityGate = vbNullString
+  route.Path = "home"
+  route.RouterPortName = "content"
+  route.ComponentName = "HomeComponent"
+  route.ExitGate = vbNullString
+  route.SecurityGate = vbNullString
   routes.Add route
 
   Set route = New xhvRoute
-  route.path = "list"
-  route.routerPortName = "content"
-  route.componentName = "DemoClientListComponent"
-  route.exitGate = vbNullString
-  route.securityGate = vbNullString
+  route.Path = "list"
+  route.RouterPortName = "content"
+  route.ComponentName = "DemoClientListComponent"
+  route.ExitGate = vbNullString
+  route.SecurityGate = vbNullString
   routes.Add route
 
   Set route = New xhvRoute
-  route.path = "clientDetail"
-  route.routerPortName = "clientDetail"
-  route.componentName = "DemoClientDetailComponent"
-  route.exitGate = vbNullString
-  route.securityGate = vbNullString
+  route.Path = "clientDetail"
+  route.RouterPortName = "clientDetail"
+  route.ComponentName = "DemoClientDetailComponent"
+  route.ExitGate = vbNullString
+  route.SecurityGate = vbNullString
   routes.Add route
 
   Set route = New xhvRoute
-  route.path = "buttonExample"
-  route.routerPortName = "content"
-  route.componentName = "ButtonExampleComponent"
-  route.exitGate = vbNullString
-  route.securityGate = vbNullString
+  route.Path = "buttonExample"
+  route.RouterPortName = "content"
+  route.ComponentName = "ButtonExampleComponent"
+  route.ExitGate = vbNullString
+  route.SecurityGate = vbNullString
   routes.Add route
 
   Set route = New xhvRoute
-  route.path = "manageFormExample"
-  route.routerPortName = "content"
-  route.componentName = "ManageFormComponent"
-  route.exitGate = vbNullString
-  route.securityGate = vbNullString
+  route.Path = "manageFormExample"
+  route.RouterPortName = "content"
+  route.ComponentName = "ManageFormComponent"
+  route.ExitGate = vbNullString
+  route.SecurityGate = vbNullString
   routes.Add route
 
     Set route = Nothing

@@ -31,23 +31,23 @@ Option Explicit
 ' @param minimumLogLevel The minimal logging level sets in the configuration
 ' @return A concrete xhvLogger through the xhvILogger Interface
 '
-Public Function createLogger(loggerclassName As String, loggerProperties As Scripting.dictionary, minimumLogLevel As xhvENUM_LogLevel) As xhvILogger
+Public Function CreateLogger(loggerclassName As String, loggerProperties As Scripting.dictionary, MinimumLogLevel As xhvENUM_LogLevel) As xhvILogger
 
 On Error GoTo ERR_
 
     Select Case UCase(loggerclassName)
         Case "XHVLOGGERCONSOLE"
-            Set createLogger = New xhvLoggerConsole
+            Set CreateLogger = New xhvLoggerConsole
          Case "XHVLOGGERTEXTFILE"
-            Set createLogger = New xhvLoggerTextFile
+            Set CreateLogger = New xhvLoggerTextFile
          Case "XHVLOGGERJSON"
-            Set createLogger = New xhvLoggerJson
+            Set CreateLogger = New xhvLoggerJson
         Case Else
             Throw 2021, , "Logger Factory cannot find a Logger class named '" & loggerclassName & "'." & vbCrLf & vbCrLf & "Check your class name or add the related class name in xhvLoggerFactory.createLogger function."
     End Select
 
-    createLogger.minimumLogLevel = minimumLogLevel
-    createLogger.setProperties loggerProperties
+    CreateLogger.MinimumLogLevel = MinimumLogLevel
+    CreateLogger.setProperties loggerProperties
 
 
 Exit Function

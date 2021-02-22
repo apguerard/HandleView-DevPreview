@@ -41,11 +41,11 @@ Public Function GetAllClients() As Collection
             Set clientModel = New DemoClientModel
             
             clientModel.Id = rs!Id
-            clientModel.name = rs!ClientName
-            clientModel.email = rs!ClientEmail
+            clientModel.Name = rs!ClientName
+            clientModel.Email = rs!ClientEmail
             
             GetAllClients.Add clientModel
-            rs.moveNext
+            rs.MoveNext
         Loop
     End If
     
@@ -74,8 +74,8 @@ Private Function IDemoClientService_getClientById(Id As Long) As DemoClientModel
     If Not (rs.EOF And rs.BOF) Then
         Set IDemoClientService_getClientById = New DemoClientModel
         IDemoClientService_getClientById.Id = rs!Id
-        IDemoClientService_getClientById.name = rs!ClientName
-        IDemoClientService_getClientById.email = rs!ClientEmail
+        IDemoClientService_getClientById.Name = rs!ClientName
+        IDemoClientService_getClientById.Email = rs!ClientEmail
     Else
         Set IDemoClientService_getClientById = Nothing
         Exit Function

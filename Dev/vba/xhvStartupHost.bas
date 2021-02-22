@@ -35,7 +35,7 @@ On Error GoTo ERR_
     Set HV = xhv ' <--- This line calls the Class_Initialize() of the xhv Class which is static <--  DO NOT REMOVE
     
     'Get configuration (from our custum source if wanted e.g. Json file, other DB, etc...)
-    xhvConfigurator.addLocalDB xhvConst.APP_CONFIG_TABLE_NAME, xhvConst.APP_CONFIG_ID_FIELD, xhvConst.APP_CONFIG_VALUE_FIELD  ' <--- Can be changed if we use other source for configuration
+    xhvConfigurator.AddLocalDB xhvConst.APP_CONFIG_TABLE_NAME, xhvConst.APP_CONFIG_ID_FIELD, xhvConst.APP_CONFIG_VALUE_FIELD  ' <--- Can be changed if we use other source for configuration
     
 
 Exit Sub

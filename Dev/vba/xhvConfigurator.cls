@@ -33,6 +33,7 @@ Private Sub Class_Initialize()
     Set this.Configurations = New Scripting.dictionary
 End Sub
 
+
 'ReadOnly
 Public Property Get Configurations() As Scripting.dictionary
     Set Configurations = this.Configurations
@@ -45,7 +46,7 @@ End Property
 ' @param idFieldLabel Name of the field that contains the configuration id
 ' @param ivalueStringLabel Name of the field that contains the configuration value
 '
-Public Sub addLocalDB(tableName As String, idFieldLabel, ivalueStringLabel, Optional filter As String)
+Public Sub AddLocalDB(tableName As String, idFieldLabel, ivalueStringLabel, Optional filter As String)
 
 On Error GoTo ERR_
 
@@ -63,15 +64,15 @@ On Error GoTo ERR_
         If Not (rs.EOF And rs.BOF) Then
             Dim sID As String
             Do While Not rs.EOF
-                sID = IIf(IsNull(rs![ConfigIdField].value), vbNullString, rs![ConfigIdField].value)
+                sID = IIf(IsNull(rs![ConfigIdField].Value), vbNullString, rs![ConfigIdField].Value)
                 If this.Configurations.Exists(sID) Then
                     xhvLog.LogWarning "The configuration '{{config}}' appears in double but won't be overwritten.", sID
-                ElseIf IsNull(rs![ConfigValueField].value) Then
+                ElseIf IsNull(rs![ConfigValueField].Value) Then
                     xhvLog.LogWarning "The configuration '{{config}}' contains the value: null.", sID
                 Else
-                    this.Configurations.Add sID, tryCastType(rs![ConfigValueField].value)
+                    this.Configurations.Add sID, tryCastType(rs![ConfigValueField].Value)
                 End If
-                rs.moveNext
+                rs.MoveNext
             Loop
         End If
     

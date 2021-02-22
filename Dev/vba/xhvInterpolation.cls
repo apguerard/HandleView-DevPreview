@@ -26,21 +26,21 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type TxhvInterpolation
-    typeInterpolation As String
-    value As String
+    TypeInterpolation As String
+    Value As String
 End Type
 Private this As TxhvInterpolation
 
-Public Property Get typeInterpolation() As String
-    typeInterpolation = this.typeInterpolation
+Public Property Get TypeInterpolation() As String
+    TypeInterpolation = this.TypeInterpolation
 End Property
-Public Property Let typeInterpolation(value As String)
-    this.typeInterpolation = value
+Public Property Let TypeInterpolation(Value As String)
+    this.TypeInterpolation = Value
 End Property
 
-Public Property Get value() As String
-    value = this.value
+Public Property Get Value() As String
+    Value = this.Value
 End Property
-Public Property Let value(value As String)
-    this.value = value
+Public Property Let Value(Value As String)
+    this.Value = Value
 End Property

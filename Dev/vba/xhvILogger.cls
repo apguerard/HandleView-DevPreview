@@ -23,12 +23,12 @@ Attribute VB_Exposed = False
 '
 Option Explicit
 
-Public Property Let minimumLogLevel(value As xhvENUM_LogLevel)
+Public Property Let MinimumLogLevel(Value As xhvENUM_LogLevel)
 End Property
-Public Property Get minimumLogLevel() As xhvENUM_LogLevel
+Public Property Get MinimumLogLevel() As xhvENUM_LogLevel
 End Property
 
-Public Property Set enhancements(value As Scripting.dictionary)
+Public Property Set enhancements(Value As Scripting.dictionary)
 End Property
 Public Property Get enhancements() As Scripting.dictionary
 End Property

@@ -45,7 +45,7 @@ Option Explicit
 ' @param args A regular array containing the parameters we want to pass to the method
 '
 Public Function CallByNameXHV(Object As Object, ProcName As String, args() As Variant)
-   AssignResult CallByNameXHV, rtcCallByName(Object, StrPtr(ProcName), VbMethod, args)
+   assignResult CallByNameXHV, rtcCallByName(Object, StrPtr(ProcName), VbMethod, args)
 End Function
 
 ''
@@ -58,7 +58,7 @@ Public Function NewGUID() As String
     NewGUID = Replace(Mid(Application.StringFromGUID(b), 8, 36), "-", vbNullString)
 End Function
 
-Private Sub AssignResult(target, result)
+Private Sub assignResult(target, result)
   If VBA.IsObject(result) Then Set target = result Else target = result
 End Sub
 

@@ -43,7 +43,7 @@ Private Sub Class_Initialize()
     Set props = New Scripting.dictionary
     
     'Inject dependencies here if needed->
-    Set ClientService = xhvDI.inject("IDemoUserService")
+    Set ClientService = xhvDI.Inject("IDemoUserService")
     
     this.NameType = COMPONENT_NAME_TYPE
     this.TemplateUrl = TEMPLATE_URL
@@ -59,15 +59,15 @@ Public Property Get ParentComponent() As xhvIController
 End Property
 
 
-Private Property Set xhvIController_childComponents(value As Collection)
-    Set this.ChildComponents = value
+Private Property Set xhvIController_childComponents(Value As Collection)
+    Set this.ChildComponents = Value
 End Property
 Private Property Get xhvIController_childComponents() As Collection
     Set xhvIController_childComponents = this.ChildComponents
 End Property
 
-Private Property Let xhvIController_ancestorsList(value As String)
-    this.AncestorsList = value
+Private Property Let xhvIController_ancestorsList(Value As String)
+    this.AncestorsList = Value
 End Property
 Private Property Get xhvIController_ancestorsList() As String
     xhvIController_ancestorsList = this.AncestorsList
@@ -86,36 +86,36 @@ End Property
 Private Property Get xhvIController_isUsedAsEntryPoint() As Boolean
     xhvIController_isUsedAsEntryPoint = this.IsUsedAsEntryPoint
 End Property
-Private Property Let xhvIController_isUsedAsEntryPoint(value As Boolean)
-    this.IsUsedAsEntryPoint = value
+Private Property Let xhvIController_isUsedAsEntryPoint(Value As Boolean)
+    this.IsUsedAsEntryPoint = Value
 End Property
 
 Private Property Get xhvIController_nameType() As String
     xhvIController_nameType = this.NameType
 End Property
-Private Property Let xhvIController_nameType(value As String)
-    this.NameType = value
+Private Property Let xhvIController_nameType(Value As String)
+    this.NameType = Value
 End Property
 
 Public Property Get xhvIController_ParentComponent() As xhvIController
     Set xhvIController_ParentComponent = this.ParentComponent
 End Property
-Public Property Set xhvIController_ParentComponent(value As xhvIController)
-    Set this.ParentComponent = value
+Public Property Set xhvIController_ParentComponent(Value As xhvIController)
+    Set this.ParentComponent = Value
 End Property
 
-Private Property Set xhvIController_routerPort(value As xhvRouterPort)
-    Set this.routerPort = value
+Private Property Set xhvIController_routerPort(Value As xhvRouterPort)
+    Set this.RouterPort = Value
 End Property
 Private Property Get xhvIController_routerPort() As xhvRouterPort
-    Set xhvIController_routerPort = this.routerPort
+    Set xhvIController_routerPort = this.RouterPort
 End Property
 
 Private Property Get xhvIController_templateString() As String
     xhvIController_templateString = this.TemplateString
 End Property
-Private Property Let xhvIController_templateString(value As String)
-    this.TemplateString = value
+Private Property Let xhvIController_templateString(Value As String)
+    this.TemplateString = Value
 End Property
 
 'ReadOnly
@@ -123,15 +123,15 @@ Private Property Get xhvIController_templateUrl() As String
     xhvIController_templateUrl = this.TemplateUrl
 End Property
 
-Private Property Set xhvIController_view(value As MSHTML.DispHTMLGenericElement)
-    Set this.view = value
+Private Property Set xhvIController_view(Value As MSHTML.DispHTMLGenericElement)
+    Set this.View = Value
 End Property
 Private Property Get xhvIController_view() As MSHTML.DispHTMLGenericElement
-    Set xhvIController_view = this.view
+    Set xhvIController_view = this.View
 End Property
 
-Private Property Let xhvIController_wrapperElementType(value As String)
-    this.WrapperElementType = value
+Private Property Let xhvIController_wrapperElementType(Value As String)
+    this.WrapperElementType = Value
 End Property
 Private Property Get xhvIController_wrapperElementType() As String
     xhvIController_wrapperElementType = this.WrapperElementType
@@ -151,7 +151,7 @@ Private Function xhvIController_interComponentCall(ParamArray agrs() As Variant)
 End Function
 
 Private Sub xhvIController_subscribeEventDispatcher()
-    Set eventDispatcher = this.view.querySelector("#" & "eventdispatcher" & this.Guid)
+    Set eventDispatcher = this.View.querySelector("#" & "eventdispatcher" & this.Guid)
     ExecuteJS vbNullString, "attachEventDispatcher('" & this.Guid & "')"
 End Sub
 
@@ -165,7 +165,7 @@ Private Sub xhvIController_onAfterInit(attributes As Scripting.dictionary)
 End Sub
 
 'Interface Function Override
-Private Sub xhvIController_init(params As Scripting.dictionary)
+Private Sub xhvIController_init(Params As Scripting.dictionary)
     'No params
 
     'Add your custom init code below =>
@@ -186,7 +186,7 @@ End Sub
 'Interface Function Override
 Private Function xhvIController_render() As MSHTML.HTMLGenericElement
 
-    Set xhvIController_render = this.view
+    Set xhvIController_render = this.View
     base.interpolate Me, props
     'Add your custom render code below =>
     '-----------------------------------
@@ -200,8 +200,8 @@ Private Function xhvIController_render() As MSHTML.HTMLGenericElement
     Dim rowTemplate As MSHTML.HTMLTableRow
     Dim newRow As MSHTML.HTMLTableRow
     
-    Set rowTemplate = this.view.querySelector("[xhv-table-row]")
-    Set tableBody = this.view.querySelector("[xhv-table-body]")
+    Set rowTemplate = this.View.querySelector("[xhv-table-row]")
+    Set tableBody = this.View.querySelector("[xhv-table-body]")
     
     For Each demoClient In demoClients
         Set newRow = Document.createElement("TR")
@@ -209,7 +209,7 @@ Private Function xhvIController_render() As MSHTML.HTMLGenericElement
          
         newRow.setAttribute "xhv-params", demoClient.Id
         newRow.cells(0).innerText = demoClient.Id
-        newRow.cells(1).innerText = demoClient.name
+        newRow.cells(1).innerText = demoClient.Name
         
         tableBody.appendChild newRow
     Next
@@ -252,7 +252,7 @@ End Sub
 
 
 
-Public Function showDetail(ParamArray args() As Variant) As Boolean
+Public Function ShowDetail(ParamArray args() As Variant) As Boolean
 
     
     xhvRouter.Navigate "clientDetail/{'id':" & args(0) & "}"

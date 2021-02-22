@@ -25,37 +25,37 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type TxhvService
-    interface As String
-    scope As xhvENUM_DependencyInjectionScope
-    useClass As String
-    useFactory As String
+    Interface As String
+    Scope As xhvENUM_DependencyInjectionScope
+    UseClass As String
+    UseFactory As String
 End Type
 Private this As TxhvService
 
-Public Property Get interface() As String
-    interface = this.interface
+Public Property Get Interface() As String
+    Interface = this.Interface
 End Property
-Public Property Let interface(value As String)
-    this.interface = interface
-End Property
-
-Public Property Get scope() As xhvENUM_DependencyInjectionScope
-    scope = this.scope
-End Property
-Public Property Let scope(value As xhvENUM_DependencyInjectionScope)
-    this.scope = value
+Public Property Let Interface(Value As String)
+    this.Interface = Interface
 End Property
 
-Public Property Get useClass() As String
-    useClass = this.useClass
+Public Property Get Scope() As xhvENUM_DependencyInjectionScope
+    Scope = this.Scope
 End Property
-Public Property Let useClass(value As String)
-    this.useClass = value
+Public Property Let Scope(Value As xhvENUM_DependencyInjectionScope)
+    this.Scope = Value
 End Property
 
-Public Property Get useFactory() As String
-    useFactory = this.useFactory
+Public Property Get UseClass() As String
+    UseClass = this.UseClass
 End Property
-Public Property Let useFactory(value As String)
-    this.useFactory = value
+Public Property Let UseClass(Value As String)
+    this.UseClass = Value
+End Property
+
+Public Property Get UseFactory() As String
+    UseFactory = this.UseFactory
+End Property
+Public Property Let UseFactory(Value As String)
+    this.UseFactory = Value
 End Property

@@ -44,27 +44,27 @@ End Sub
 ' @param useClass Optional - Name of the concrete class to use when creating the requested interface
 ' @param useFactory Optional - Name of the factory function to call when creating the requested interface.
 '
-Public Sub AddSingleton(interface As String, Optional useClass As String, Optional useFactory As String)
+Public Sub AddSingleton(Interface As String, Optional UseClass As String, Optional UseFactory As String)
 
 On Error GoTo ERR_
 
     Dim service As xhvService
     Set service = New xhvService
     
-    If Trim(useClass) = vbNullString And Trim(useFactory) = vbNullString Then
+    If Trim(UseClass) = vbNullString And Trim(UseFactory) = vbNullString Then
         Throw 2014, , "You try to add a service in the DI container, but both useClass and useFactory properties are empty." & vbCrLf & vbCrLf & "You need to provide one of the two or the DI system won't be able to create the service."
     End If
     
-    If this.services.Exists(interface) Then
-        Throw 2015, , "The service with the interface '" & interface & "' already exits in the DI container." & vbCrLf & vbCrLf & "You cannot add two different services with the same interface id. Check your Service Configuration Module."
+    If this.services.Exists(Interface) Then
+        Throw 2015, , "The service with the interface '" & Interface & "' already exits in the DI container." & vbCrLf & vbCrLf & "You cannot add two different services with the same interface id. Check your Service Configuration Module."
     End If
     
-    service.interface = interface
-    service.useClass = useClass
-    service.useFactory = useFactory
-    service.scope = SINGLETON
+    service.Interface = Interface
+    service.UseClass = UseClass
+    service.UseFactory = UseFactory
+    service.Scope = SINGLETON
 
-    this.services.Add interface, service
+    this.services.Add Interface, service
     
     Set service = Nothing
     
@@ -91,27 +91,27 @@ End Sub
 ' @param useClass Optional - Name of the concrete class to use when creating the requested interface
 ' @param useFactory Optional - Name of the factory function to call when creating the requested interface.
 '
-Public Sub AddTransient(interface As String, Optional useClass As String, Optional useFactory As String)
+Public Sub AddTransient(Interface As String, Optional UseClass As String, Optional UseFactory As String)
 
 On Error GoTo ERR_
 
     Dim service As xhvService
     Set service = New xhvService
     
-    If Trim(useClass) = vbNullString And Trim(useFactory) = vbNullString Then
+    If Trim(UseClass) = vbNullString And Trim(UseFactory) = vbNullString Then
         Throw 2014, , "You try to add a service in the DI container, but both useClass and useFactory properties are empty." & vbCrLf & vbCrLf & "You need to provide one of the two or the DI system won't be able to create the service."
     End If
     
-    If this.services.Exists(interface) Then
-        Throw 2015, , "The service with the interface '" & interface & "' already exits in the DI container." & vbCrLf & vbCrLf & "You cannot add two different services with the same interface id. Check your Service Configuration Module."
+    If this.services.Exists(Interface) Then
+        Throw 2015, , "The service with the interface '" & Interface & "' already exits in the DI container." & vbCrLf & vbCrLf & "You cannot add two different services with the same interface id. Check your Service Configuration Module."
     End If
     
-    service.interface = interface
-    service.useClass = useClass
-    service.useFactory = useFactory
-    service.scope = TRANSIENT
+    service.Interface = Interface
+    service.UseClass = UseClass
+    service.UseFactory = UseFactory
+    service.Scope = TRANSIENT
 
-    this.services.Add interface, service
+    this.services.Add Interface, service
     
     Set service = Nothing
     
@@ -136,7 +136,7 @@ End Sub
 ' @param interface Id/Name of the interface for which we want to create the object.
 ' @return Concrete implementation correponding to the interface id/name
 '
-Public Function inject(interfaceName As String) As Object
+Public Function Inject(interfaceName As String) As Object
 
 On Error GoTo ERR_
 
@@ -145,28 +145,28 @@ On Error GoTo ERR_
     If this.services.Exists(interfaceName) Then
         Set service = this.services.Item(interfaceName)
         
-        If Trim(service.useClass) <> vbNullString Then
+        If Trim(service.UseClass) <> vbNullString Then
         
-            If service.scope = SINGLETON Then
+            If service.Scope = SINGLETON Then
                 If Not (this.singletons.Exists(interfaceName)) Then
                     'Create the original service in not already in the singletons Dictionary
-                    this.singletons.Add interfaceName, xhvServiceFactory.getServiceFromclassName(service.useClass)
+                    this.singletons.Add interfaceName, xhvServiceFactory.GetServiceFromclassName(service.UseClass)
                 End If
-                Set inject = this.singletons.Item(interfaceName)
-            ElseIf service.scope = TRANSIENT Then
-                Set inject = xhvServiceFactory.getServiceFromclassName(service.useClass)
+                Set Inject = this.singletons.Item(interfaceName)
+            ElseIf service.Scope = TRANSIENT Then
+                Set Inject = xhvServiceFactory.GetServiceFromclassName(service.UseClass)
             End If
             
-        ElseIf Trim(service.useFactory) <> vbNullString Then
+        ElseIf Trim(service.UseFactory) <> vbNullString Then
         
-            If service.scope = SINGLETON Then
+            If service.Scope = SINGLETON Then
                 If Not (this.singletons.Exists(interfaceName)) Then
                     'Create the original service in not already in the singletons Dictionary
-                    this.singletons.Add interfaceName, xhvServiceFactory.getServiceFromFactory(service.useFactory)
+                    this.singletons.Add interfaceName, xhvServiceFactory.GetServiceFromFactory(service.UseFactory)
                 End If
-                Set inject = this.singletons.Item(interfaceName)
-            ElseIf service.scope = TRANSIENT Then
-                Set inject = xhvServiceFactory.getServiceFromFactory(service.useFactory)
+                Set Inject = this.singletons.Item(interfaceName)
+            ElseIf service.Scope = TRANSIENT Then
+                Set Inject = xhvServiceFactory.GetServiceFromFactory(service.UseFactory)
             End If
   
         Else

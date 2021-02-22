@@ -32,7 +32,7 @@ Global xhvConst As TxhvConst
 Public Sub SetConst()
 
     xhvConst.FRAMEWORK_VERSION = "0.0.2"
-    xhvConst.DEBUG_MODE = True
+    xhvConst.DEBUG_MODE = False
     xhvConst.FAIL_SILENT_LOG_EXCEPTION = False
     
     xhvConst.APP_CONFIG_TABLE_NAME = "xhvAppConfig"

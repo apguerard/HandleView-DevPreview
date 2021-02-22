@@ -29,13 +29,13 @@ Option Explicit
 ' @param enhancementclassName The name of the enhancement to create.
 ' @return A concrete xhvLoggerEnhacement through the xhvILoggerEnhancement Interface
 '
-Public Function createLoggerEnhancement(enhancementclassName As String) As xhvILoggerEnhancement
+Public Function CreateLoggerEnhancement(enhancementclassName As String) As xhvILoggerEnhancement
 
 On Error GoTo ERR_
 
     Select Case UCase(enhancementclassName)
         Case "XHVLOGENHANCEMENTWITHUSERCONTEXT"
-            Set createLoggerEnhancement = New xhvLogEnhancementWithUserContext
+            Set CreateLoggerEnhancement = New xhvLogEnhancementWithUserContext
             
         Case Else
             Throw 2020, , "Logger Enhancement Factory cannot find a log enhancement class named '" & enhancementclassName & "'." & vbCrLf & vbCrLf & "Check your class name or add the related class name in xhvLoggerEnhancementFactory.createLoggerEnhancement function."

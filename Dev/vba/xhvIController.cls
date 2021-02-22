@@ -25,16 +25,16 @@ Option Explicit
 
 Public Property Get AncestorsList() As String
 End Property
-Public Property Let AncestorsList(value As String)
+Public Property Let AncestorsList(Value As String)
 End Property
 
-Public Property Get componentObject() As Object
+Public Property Get ComponentObject() As Object
 End Property
 
 
 Public Property Get ChildComponents() As Collection
 End Property
-Public Property Set ChildComponents(value As Collection)
+Public Property Set ChildComponents(Value As Collection)
 End Property
 
 'ReadOnly
@@ -44,47 +44,47 @@ End Property
 
 Public Property Get IsUsedAsEntryPoint() As Boolean
 End Property
-Public Property Let IsUsedAsEntryPoint(value As Boolean)
+Public Property Let IsUsedAsEntryPoint(Value As Boolean)
 End Property
 
 
 'ReadOnly
 Public Property Get NameType() As String
 End Property
-Public Property Let NameType(value As String)
+Public Property Let NameType(Value As String)
 End Property
 
 Public Property Get ParentComponent() As xhvIController
 End Property
-Public Property Set ParentComponent(value As xhvIController)
+Public Property Set ParentComponent(Value As xhvIController)
 End Property
 
-Public Property Get routerPort() As xhvRouterPort
+Public Property Get RouterPort() As xhvRouterPort
 End Property
-Public Property Set routerPort(value As xhvRouterPort)
+Public Property Set RouterPort(Value As xhvRouterPort)
 End Property
 
 Public Property Get TemplateString() As String
 End Property
-Public Property Let TemplateString(value As String)
+Public Property Let TemplateString(Value As String)
 End Property
 
 'ReadOnly
 Public Property Get TemplateUrl() As String
 End Property
 
-Public Property Get view() As MSHTML.HTMLGenericElement
+Public Property Get View() As MSHTML.HTMLGenericElement
 End Property
-Public Property Set view(value As MSHTML.HTMLGenericElement)
+Public Property Set View(Value As MSHTML.HTMLGenericElement)
 End Property
 
 Public Property Get WrapperElementType() As String
 End Property
-Public Property Let WrapperElementType(value As String)
+Public Property Let WrapperElementType(Value As String)
 End Property
 
 
-Public Sub Init(params As Scripting.dictionary)
+Public Sub Init(Params As Scripting.dictionary)
 End Sub
 
 Public Sub Dispose()

@@ -75,7 +75,7 @@ On Error GoTo ERR_
     Next
 
     'Return the  View
-    Set concreteComponent.view = wrapperElement
+    Set concreteComponent.View = wrapperElement
    
 
 Exit Sub
@@ -101,22 +101,22 @@ End Sub
 ' @param eventDispatcher he HTML element that raised the event. (Should be the elements with a xhv-eventlistener attribute in the template file.)
 ' @param componentObject The concrete component that  called this sub.
 '
-Public Sub DispatchEvent(eventDispatcher As MSHTML.HTMLUnknownElement, componentObject As Object)
+Public Sub DispatchEvent(eventDispatcher As MSHTML.HTMLUnknownElement, ComponentObject As Object)
 
 On Error GoTo ERR_
 
     Dim tempString() As String
     Dim method As String
-    Dim params As String
+    Dim Params As String
     Dim paramsArray()
     Dim i As Integer
 
     'Get the event handler to call (Remove any unwanted space in the method's name)
     method = Replace(eventDispatcher.getAttribute(Syntax.Attr.eventHandlerAttr), " ", vbNullString)
-    params = eventDispatcher.getAttribute(Syntax.Attr.paramsAttr)
+    Params = eventDispatcher.getAttribute(Syntax.Attr.paramsAttr)
     
     'Get and separate the parameters values
-    tempString = Split(params, ";")
+    tempString = Split(Params, ";")
     If (UBound(tempString)) <> -1 Then
         ReDim paramsArray(UBound(tempString))
         For i = 0 To UBound(tempString)
@@ -135,7 +135,7 @@ On Error GoTo ERR_
     If Left(method, "7") = "parent." Then
     
         Dim parentParams(1) As Variant
-        Dim interface As xhvIController
+        Dim Interface As xhvIController
         Dim interface2 As xhvIController
         Dim methodName As String
         
@@ -144,20 +144,20 @@ On Error GoTo ERR_
         parentParams(0) = methodName
         parentParams(1) = paramsArray
         
-        If Not (componentObject.ParentComponent Is Nothing) Then
-            Set interface = componentObject.ParentComponent.componentObject
+        If Not (ComponentObject.ParentComponent Is Nothing) Then
+            Set Interface = ComponentObject.ParentComponent.ComponentObject
 
             On Error Resume Next
-                CallByNameXHV interface, "interComponentCall", parentParams
+                CallByNameXHV Interface, "interComponentCall", parentParams
                 If Err.Number <> 0 Then
                     
-                    Set interface2 = componentObject
+                    Set interface2 = ComponentObject
                     On Error GoTo ERR_
-                    Throw 2005, Err.source, "The method '" & methodName & "' cannot be found in the parent component of '" & interface2.NameType & "' which is '" & interface.NameType & "'."
+                    Throw 2005, Err.source, "The method '" & methodName & "' cannot be found in the parent component of '" & interface2.NameType & "' which is '" & Interface.NameType & "'."
                 End If
             On Error GoTo ERR_
         Else
-            Set interface2 = componentObject
+            Set interface2 = ComponentObject
             On Error GoTo ERR_
             Throw 2006, Err.source, "You're trying to call the method '" & methodName & "' in the parent component of '" & interface2.NameType & "' , but this component is a root component, so it does not have a parent."
         End If
@@ -166,11 +166,11 @@ On Error GoTo ERR_
         'TODO: Call a method in a child component. Which one? All? All descendants?
     Else
         On Error Resume Next
-            CallByNameXHV componentObject, method, paramsArray
+            CallByNameXHV ComponentObject, method, paramsArray
             If Err.Number <> 0 Then
                 'Retry to call the method on the parent component until it reaches the root parent
-                If Not (componentObject.ParentComponent Is Nothing) Then
-                    DispatchEvent eventDispatcher, componentObject.ParentComponent.componentObject
+                If Not (ComponentObject.ParentComponent Is Nothing) Then
+                    DispatchEvent eventDispatcher, ComponentObject.ParentComponent.ComponentObject
                 Else
                 'Throw an error if no method have been found in all the parent
                 On Error GoTo ERR_
@@ -200,14 +200,14 @@ End Sub
 ' @param component The concrete component for which we want to call a method.
 ' @param paramArray An array of parameters for the specific methods.
 '
-Public Sub InterComponentCall(component As Object, ParamArray args() As Variant)
+Public Sub InterComponentCall(Component As Object, ParamArray args() As Variant)
    
     Dim method As String
     Dim paramsArray()
     method = args(0)(0)
     paramsArray = args(0)(1)
 
-    CallByNameXHV component, method, paramsArray
+    CallByNameXHV Component, method, paramsArray
     
 End Sub
 
@@ -217,7 +217,7 @@ End Sub
 ' @param component The concrete component in which we want to interpolate e.g. replace values
 ' @param props A dictionary containing all properties of the components..
 '
-Public Sub interpolate(component As xhvIController, props As Scripting.dictionary)
+Public Sub interpolate(Component As xhvIController, props As Scripting.dictionary)
 
 On Error GoTo ERR_
 
@@ -226,51 +226,51 @@ On Error GoTo ERR_
     Dim interp As xhvInterpolation
     Dim valueString() As String
     
-    Set interpolations = getInterpolations(component.view.innerHTML)
+    Set interpolations = getInterpolations(Component.View.innerHTML)
     
     For Each interp In interpolations
     
-        Select Case interp.typeInterpolation
+        Select Case interp.TypeInterpolation
             Case "props"
                 'Check if we call a scalar property or a property of an object property
-                valueString = Split(interp.value, ".")
+                valueString = Split(interp.Value, ".")
                 If UBound(valueString) = 0 Then
                     'Scalar property
-                    If props.Exists(interp.value) Then
-                        component.view.innerHTML = Replace(component.view.innerHTML, "{{props:" & interp.value & "}}", props.Item(interp.value))
+                    If props.Exists(interp.Value) Then
+                        Component.View.innerHTML = Replace(Component.View.innerHTML, "{{props:" & interp.Value & "}}", props.Item(interp.Value))
                     Else
-                        Throw 2008, Err.source, "The interpolation: '" & interp.value & "' cannot be resolved by the framework."
+                        Throw 2008, Err.source, "The interpolation: '" & interp.Value & "' cannot be resolved by the framework."
                     End If
                 ElseIf UBound(valueString) = 1 Then
                     'Object property
                     If props.Exists(valueString(0)) Then
-                        component.view.innerHTML = Replace(component.view.innerHTML, "{{props:" & interp.value & "}}", CallByName(props.Item(valueString(0)), valueString(1), VbGet))
+                        Component.View.innerHTML = Replace(Component.View.innerHTML, "{{props:" & interp.Value & "}}", CallByName(props.Item(valueString(0)), valueString(1), VbGet))
                     Else
-                        Throw 2008, Err.source, "The interpolation: '" & interp.value & "' cannot be resolved by the framework."
+                        Throw 2008, Err.source, "The interpolation: '" & interp.Value & "' cannot be resolved by the framework."
                     End If
                 Else
                     'More than one level of reference
                     'The framework do not support calling an object property of an object property
-                    Throw 2009, Err.source, "The interpolation: '" & interp.value & "' cannot be resolved by the framework." & vbCrLf & vbCrLf & "Handleview do not support more than one(1) level of object property for now."
+                    Throw 2009, Err.source, "The interpolation: '" & interp.Value & "' cannot be resolved by the framework." & vbCrLf & vbCrLf & "Handleview do not support more than one(1) level of object property for now."
                 End If
             Case "func"
-                valueString = Split(interp.value, ".")
+                valueString = Split(interp.Value, ".")
                 If UBound(valueString) = 0 Then
                     On Error Resume Next
-                        component.view.innerHTML = Replace(component.view.innerHTML, "{{func:" & interp.value & "}}", CallByName(component.componentObject, valueString(0), VbMethod))
+                        Component.View.innerHTML = Replace(Component.View.innerHTML, "{{func:" & interp.Value & "}}", CallByName(Component.ComponentObject, valueString(0), VbMethod))
                         If Err.Number <> 0 Then
                             On Error GoTo ERR_
-                            Throw 2010, , "The component : " & component.NameType & " cannot resolve the 'func' interpolation: " & valueString(0) & vbCrLf & vbCrLf & "This component probably dont't have this function or this function generate an unhandled error."
+                            Throw 2010, , "The component : " & Component.NameType & " cannot resolve the 'func' interpolation: " & valueString(0) & vbCrLf & vbCrLf & "This component probably dont't have this function or this function generate an unhandled error."
                         End If
                     On Error GoTo ERR_
                 Else
                     'More than one level of reference
                     'The framework do not support calling an object method of an object property
-                    Throw 2011, Err.source, "The interpolation: " & interp.value & " cannot be resolved by the framework." & vbCrLf & vbCrLf & "Handleview do not support call to method of an object property for now."
+                    Throw 2011, Err.source, "The interpolation: " & interp.Value & " cannot be resolved by the framework." & vbCrLf & vbCrLf & "Handleview do not support call to method of an object property for now."
                     'TODO: Next version add this feature
                 End If
             Case Else
-                Throw 2012, Err.source, "Interpolation type does not exist: " & interp.typeInterpolation
+                Throw 2012, Err.source, "Interpolation type does not exist: " & interp.TypeInterpolation
         End Select
     
     Next
@@ -297,38 +297,38 @@ End Sub
 '
 ' @param view The string representing the HTML template of the concrete component
 ' @return A collection returning all interpolations.
-Private Function getInterpolations(view As String) As Collection
+Private Function getInterpolations(View As String) As Collection
 
 On Error GoTo ERR_
 
 
-    Dim stream As xhvStream
+    Dim Stream As xhvStream
     Dim myChar As String
     Dim tempString As String
     Dim tempString2() As String
     Dim interp As xhvInterpolation
     
     Set getInterpolations = New Collection
-    Set stream = New xhvStream
+    Set Stream = New xhvStream
     
     'Use a xhvStream object and run through all characters in the string
-    stream.stream = view
+    Stream.Stream = View
     
-    myChar = stream.moveNext
+    myChar = Stream.MoveNext
     
     Do While myChar <> vbNullString
 
         If myChar = "{" Then
             'Check if it is indeed an interpolation in looking for the next char
-            If stream.Peak(1) = "{" Then
+            If Stream.peak(1) = "{" Then
                 Set interp = New xhvInterpolation
-                stream.moveNext
+                Stream.MoveNext
                 tempString = vbNullString
-                myChar = stream.moveNext
+                myChar = Stream.MoveNext
                 Do While myChar <> vbNullString
-                    If myChar = "}" And stream.Peak() = "}" Then Exit Do
+                    If myChar = "}" And Stream.peak() = "}" Then Exit Do
                     tempString = tempString & myChar
-                    myChar = stream.moveNext()
+                    myChar = Stream.MoveNext()
                 Loop
                 
                 If InStr(1, tempString, ":") = 0 Then
@@ -337,8 +337,8 @@ On Error GoTo ERR_
                 
                 tempString2 = Split(tempString, ":")
                 
-                interp.typeInterpolation = tempString2(0) 'Is it a props or a func call
-                interp.value = tempString2(1)
+                interp.TypeInterpolation = tempString2(0) 'Is it a props or a func call
+                interp.Value = tempString2(1)
                 
                 getInterpolations.Add interp
                 
@@ -346,11 +346,11 @@ On Error GoTo ERR_
         
         End If
             
-        myChar = stream.moveNext
+        myChar = Stream.MoveNext
         
     Loop
     
-    Set stream = Nothing
+    Set Stream = Nothing
     Set interp = Nothing
     
 Exit Function
@@ -375,16 +375,16 @@ Private Function readTemplateFromFile(templatefileName As String) As String
 
 On Error GoTo ERR_
 
-        Dim adoStream As ADODB.stream
+        Dim adoStream As ADODB.Stream
         Dim pathFileName As String
                
-        pathFileName = Configuration("App.BaseViewsFolder") & templatefileName
+        pathFileName = CurrentProject.Path & Configuration("App.BaseViewsFolder") & templatefileName
         
         If Not (FileExists(pathFileName)) Then
             Throw 2004, Err.source, "The component HTML file template could not be found." & vbCrLf & "File : " & pathFileName
         End If
         
-        Set adoStream = New ADODB.stream
+        Set adoStream = New ADODB.Stream
         adoStream.Charset = "UTF-8"
 
         adoStream.Open
