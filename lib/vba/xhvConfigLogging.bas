@@ -2,7 +2,7 @@ Attribute VB_Name = "xhvConfigLogging"
 '@Folder lib.HandleView.Logging
 
 ' Copyright (C) 2021 Bluejacket Software - All Rights Reserved
-' Copyright (C) 2019 Alain Guérard - All Rights Reserved
+' Copyright (C) 2019 Alain Guï¿½rard - All Rights Reserved
 ' You may use, distribute and modify this code under the
 ' terms of the MIT license.
 '
@@ -12,7 +12,7 @@ Attribute VB_Name = "xhvConfigLogging"
 
 ''
 ' This module is used to configure logging services in a centralized place.
-' Eventually, these configuration couls be placed in a config file.
+' Eventually, these configuration could be placed in a config file.
 ' Think of this module as if it was a config file.
 '
 Option Explicit
