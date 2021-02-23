@@ -10,7 +10,7 @@ Attribute VB_Exposed = False
 '@Folder lib.HandleView.Routing
 
 ' Copyright (C) 2021 Bluejacket Software - All Rights Reserved
-' Copyright (C) 2019 Alain Guérard - All Rights Reserved
+' Copyright (C) 2019 Alain Guï¿½rard - All Rights Reserved
 ' You may use, distribute and modify this code under the
 ' terms of the MIT license.
 '
@@ -19,7 +19,7 @@ Attribute VB_Exposed = False
 '
 
 ''
-' This class represents a history node (which is a xhvRoute)
+' This class represents a history node (which is a xhvRoute).
 '
 Option Explicit
 

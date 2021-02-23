@@ -2,7 +2,7 @@ Attribute VB_Name = "xhvStartupApp"
 '@Folder lib.HandleView.Config
 
 ' Copyright (C) 2021 Blueajacket Software - All Rights Reserved
-' Copyright (C) 2019 Alain Guérard - All Rights Reserved
+' Copyright (C) 2019 Alain Guï¿½rard - All Rights Reserved
 ' You may use, distribute and modify this code under the
 ' terms of the MIT license.
 '
@@ -11,7 +11,7 @@ Attribute VB_Name = "xhvStartupApp"
 '
 
 ''
-' Contains Application Startup functionnalities for HandleView Framework
+' Contains Application Startup functions for HandleView Framework.
 Option Explicit
 
 Private Const MODULE_NAME As String = "xhvStartupApp"
