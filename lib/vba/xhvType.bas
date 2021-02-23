@@ -2,7 +2,7 @@ Attribute VB_Name = "xhvType"
 '@Folder lib.HandleView.Config
 
 ' Copyright (C) 2019 Bluejacket Software - All Rights Reserved
-' Copyright (C) 2019 Alain Guérard - All Rights Reserved
+' Copyright (C) 2019 Alain Guï¿½rard - All Rights Reserved
 ' You may use, distribute and modify this code under the
 ' terms of the MIT license.
 '
@@ -11,7 +11,7 @@ Attribute VB_Name = "xhvType"
 '
 
 ''
-' This module contains the type def of global type used in the framework
+' This module contains the type def of global type used in the framework.
 '
 Option Explicit
 
