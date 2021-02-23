@@ -1,0 +1,3 @@
+[submodule "HandleView.wiki"] 
+  path = HandleView.wiki 
+  url = https://github.com/BluejacketSoftware/HandleView.wiki.git
