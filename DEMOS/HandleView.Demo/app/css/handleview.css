@@ -1,0 +1,40 @@
+/* panel layout mechanics */
+.cf-panel-wrap {
+    height: calc(100% - 110px);
+    width: 500px;;
+    position: fixed;
+    z-index: 9999;
+    top: 0px;
+    right: 0px;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.2s;
+    border:1px solid #ccc;
+    -webkit-box-shadow: -7px 0px 14px -7px rgba(0,0,0,0.3);
+    -moz-box-shadow: -7px 0px 14px -7px rgba(0,0,0,0.3);
+    box-shadow: -7px 0px 14px -7px rgba(0,0,0,0.3);
+  }
+  .cf-panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    color: #000;
+    overflow: hidden;
+    padding:0px;
+    
+  }
+
+  .xhv-title{
+    font-size:30px;
+  }
+
+  .xhv-unselectable{
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    cursor: default;
+  }

@@ -1,0 +1,37 @@
+<component id="" class="d-flex w-100">
+    <div class="d-flex p-5">
+        <div class=""  style="width: 50%;">
+            <h2>List Component</h2>
+            <p class="pt-2 pd-2">
+                Click on a client to get its detail.
+            </p>
+            <table id="tableindicatorList" class="table table-hover wrap">
+                <thead>
+                    <tr >
+                        <th class="cf-txt-sm">Id</th>
+                        <th class="cf-txt-sm">Name</th>
+                    </tr>
+                </thead>
+
+                <tbody xhv-table-body>
+                    <tr xhv-table-row class="xhv-unselectable" xhv-eventlistener xhv-event="click" xhv-eventhandler="showDetail" xhv-params="">
+                        <td class="cf-txt-sm cf-txt-default align-middle" width="1%" ></td>
+                        <td class="cf-txt-sm cf-txt-default align-middle" ></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div  class="p-5"  style="width:50%;">
+            <div class="xhv-title">
+                Client Details
+            </div>
+            <xhv-routerport name="clientDetail" class="d-flex flex-column"  >
+            
+            </xhv-routerport>
+        </div>
+    </div>
+
+
+    
+
+</component>

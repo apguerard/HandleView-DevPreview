@@ -1,0 +1,109 @@
+﻿'@Folder lib.HandleView
+
+''
+' Copyright (C) 2021 Bluejacket Software -  All Rights Reserved
+' Copyright (C) 2019 Alain Guérard - All Rights Reserved
+' You may use, distribute and modify this code under the
+' terms of the MIT license.
+'
+' You should have received a copy of the MIT license with
+' this file. If not, please visit : https://opensource.org/licenses/MIT
+'
+''
+' Browser form for an HandleView App
+'
+Option Explicit
+Private Const MODULE_NAME As String = "Form_App"
+
+
+''
+' Display application form.
+' Bootstrap Framework and application.
+'
+'@return N/A
+Private Sub Form_Load()
+On Error GoTo ERR_
+
+    'Set "const" values
+    SetConst
+
+    'Initialize Form
+    InitForm
+    
+    'Startup the Host HandleView framework environment
+    StartupHost WB.Object.Document
+
+    'Startup HandleView based application
+    StartupApp WB
+
+    'NOTE: Logging  is now available
+
+Exit Sub
+ERR_:
+    'Keep original error info before calling close backend database(s)
+    Dim errNumber As Long
+    Dim errDesc As String
+    errNumber = Err.Number
+    errDesc = Err.Description
+    
+    OpenAllDatabases False
+
+    If xhvConst.DEBUG_MODE Then
+        xhvExceptionManager.HandleFrameworkException errNumber, errDesc
+        Stop
+        Resume
+    Else
+        If xhvConfigurator.Configurations Is Nothing Then
+            MsgBox "Unexpected error in " & MODULE_NAME & ".FormLoad()" & vbCrLf & vbCrLf & "Please contact your administrator", vbCritical
+        Else
+            xhvExceptionManager.HandleFrameworkException errNumber, errDesc
+        End If
+    End If
+End Sub
+
+
+''
+' Initialization code
+' Add/modify your own if needed
+'
+' @return N/A
+Private Sub InitForm()
+
+    DoCmd.Maximize
+    WB.VerticalAnchor = acVerticalAnchorBoth
+    WB.HorizontalAnchor = acHorizontalAnchorBoth
+
+End Sub
+
+
+''
+' Clear the application memory
+' Add your own if needed
+'
+' @return N/A
+Private Sub Form_Unload(Cancel As Integer)
+On Error GoTo ERR_
+
+    'Close all data connection to BackEnd Databases
+    OpenAllDatabases False
+
+    'Destroy HandleView Objects
+    'TODO
+
+Exit Sub
+ERR_:
+    xhvExceptionManager.HandleFrameworkException Err.Number, Err.Description
+    If xhvConst.DEBUG_MODE Then
+        Stop
+        Resume
+    End If
+End Sub
+
+''
+'Calls End to ensure the VB_PredeclardId Classes get cleared
+'
+'@return N/A
+Private Sub Form_Close()
+    End
+End Sub
+

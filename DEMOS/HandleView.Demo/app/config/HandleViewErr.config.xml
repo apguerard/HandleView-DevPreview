@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xoErrorList version="0.1.1">
+  <Error errorNumber="1000">
+    <Label>
+      Unexpected error
+    </Label>
+    <Description>
+      An unexpected error occurs in the xo Framework. Please view the details and stack trace below to help you.
+    </Description>
+    <Details>
+      Unexpected error.
+    </Details>
+  </Error>
+  <Error errorNumber="1001">
+    <Label>
+      Route not found
+    </Label>
+    <Description>
+      An error occurs in xoView xoRouter class. Please view the details and stack trace below to help you.
+    </Description>
+    <Details>
+      The specified route was not found in the routes list. Check if you added the route in the xoRouterConfiguration class and if it matched the required route.
+    </Details>
+  </Error>
+  <Error errorNumber="1002">
+    <Label>
+      Port doesn't exist.
+    </Label>
+    <Description>
+      An error occurs in xoView XO_Router class while Navigate Function was requested. Please view the details and stack trace below to help you.
+    </Description>
+    <Details>
+      The port in which the component should be rendered does not exist in the actual Port Tree. Check if you mistyped the port name in the Navigate request or in the BasePort properties while setting the route.
+      Maybe you requested a port that haven't been intitialized yet.
+    </Details>
+  </Error>
+  <Error errorNumber="1003">
+    <Label>
+      Configuration is missing.
+    </Label>
+    <Description>
+      A required configuration value is missing in the database.
+    </Description>
+    <Details>
+      The framework needs some configuration value to initialize. The configuration below is not in the table.
+      <![CDATA[
+      <br/>
+      ]]>      
+      Enter the configuration in the table or check for spelling error.
+    </Details>
+  </Error>
+  <Error errorNumber="1004">
+    <Label>
+      Compilation Error in ~/Application/Views
+    </Label>
+    <Description>
+      Wrong HandleView Directive Type
+    </Description>
+    <Details>
+      Your view contains a HVDirective element, but the data-hv-directive attribute is either missing, mistyped or the value is not a valid HVDirective type.
+      <![CDATA[
+      <br/>
+      ]]>
+      Remove the HVDirective element from the view if you don't need it or correct the above error.
+    </Details>
+  </Error>
+  <Error errorNumber="1005">
+    <Label>
+      Compilation Error in ~/Application/Views
+    </Label>
+    <Description>
+      Missing or mistyped data-hv-javascript attribute in @Script HVDirective
+    </Description>
+    <Details>
+      The view contains a @Script HVDirective, but the data-hv-javascript attibute is missing or mistyped.
+      <![CDATA[
+      <br/>
+      ]]>
+      Check that the data-hv-javascript attribute is present and not mistyped in the HVDirective element.
+    </Details>
+  </Error>
+  <Error errorNumber="1006">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Scripts
+    </Label>
+    <Description>
+      Missing javascript file for @Script HVDirective
+    </Description>
+    <Details>
+      The view contains a @Script HVDirective, but the data-hv-javascript attibute refer to a javascript file that is missing.
+      <![CDATA[<br/>]]>
+      Check that the data-hv-javascript attribute contains the right file name, that the file exists and that it is located in the right directory.
+      Javascript file should be in the ~/wwwroot/Scripts/ directory.
+    </Details>
+  </Error>
+  <Error errorNumber="1007">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views
+    </Label>
+    <Description>
+      Layout File Missing
+    </Description>
+    <Details>
+      The layout file for the actual view is missing.
+      <![CDATA[<br/>]]>
+      Check that the layout file is present and that it is not mistyped. Layout files should be in the \Views\Shared directory of your application or in \Views\[ControllerName] of the actual controller being called.
+    </Details>
+  </Error>
+  <Error errorNumber="1008">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views
+    </Label>
+    <Description>
+      HTML View File Missing
+    </Description>
+    <Details>
+      The HTML file for the actual view is missing.
+      <![CDATA[<br/>]]>
+      Check that the HTML View file is present and that it is not mistyped. View files should be in the /Views/[ControllerName]/ directory of your application.
+      <![CDATA[<br/>]]>
+      If the HTML view file is do not have the same name as the HTML file, the name of the file must be passed as an argument by the controller when calling the ReturnView method. Still, the file must be located in the same directory (/Views/[ControllerName]/).
+    </Details>
+  </Error>
+  <Error errorNumber="1009">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views
+    </Label>
+    <Description>
+      Missing or mistyped 'value' attribute in @Layout HVDirective
+    </Description>
+    <Details>
+      The value attribute is missing in the @Layout HVDirective.
+      <![CDATA[<br/>]]>
+      Check that the HVDirective with a ' data-hv-directive="@Layout" ' attribute also have the 'value' attribute and that it is not mistyped.
+      <![CDATA[<br/>]]>
+      The value of the 'value' attribute should correspond to the name of the layout file you want to use with this view. If you want to use the default layout at ~/Views/Shared/_Layout.hv.html, you can omit the @Layout HVDirective.
+    </Details>
+  </Error>
+  <Error errorNumber="1010">
+    <Label>
+      ViewComponent name not found
+    </Label>
+    <Description>
+      An error occurs in HandleView HV_FactoryComponent class. Please view the details and stack trace below to help you.
+    </Description>
+    <Details>
+      The ViewComponent name was not found in the list.
+      Check the CreateComponent() function in the HV_FactoryComponent class and make sure the Select Case include the right name for your ViewComponent in uppercase.
+    </Details>
+  </Error>
+  <Error errorNumber="1011">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views/Shared/Components
+    </Label>
+    <Description>
+      The data-hv-VC attribute for HVViewComponent element is missing or mistyped.
+    </Description>
+    <Details>
+      Check in the actual View or Layout HTML file for HVViewComponent element without data-hv-VC attribute or with mistyped one. The value of this attribute should be the name of your component and correspond to the Select Case value in the  HV_FactoryComponent.CreateComponent() method.
+    </Details>
+  </Error>
+  <Error errorNumber="1012">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views/Shared/Components
+    </Label>
+    <Description>
+      The data-hv-VC-DOMId attribute for HVViewComponent element is missing or mistyped.
+    </Description>
+    <Details>
+      Check in the actual View or Layout HTML file for HVViewComponent element without data-hv-VC-DOMId attribute or with mistyped one. The value of this attribute will be the Id assigned in the DOM so you can manipulate the element in Javascript.
+    </Details>
+  </Error>
+  <Error errorNumber="1013">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views/Shared/Components
+    </Label>
+    <Description>
+      The data-hv-VC-Parameters attribute for HVViewComponent element is missing or mistyped.
+    </Description>
+    <Details>
+      Check in the actual View or Layout HTML file for HVViewComponent element without data-hv-VC-Parameters attribute or with mistyped one.
+      The value of this attribute should contains the parameters you want to pass to your ViewComponent in name-value pair, example: param1=a;param2=b.
+      <![CDATA[<br/><br/>]]>
+      If your component don't need any parameter, just put the attribute like that: data-hv-VC-Parameters=""
+    </Details>
+  </Error>
+  <Error errorNumber="1014">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views/Shared/Components
+    </Label>
+    <Description>
+      HTML View File Missing
+    </Description>
+    <Details>
+      The HTML file for a ViewComponent is missing.
+      <![CDATA[<br/>]]>
+      Check that the HTML ViewComponent file is present and that it is not mistyped. ViewComponents files should be in the \Views\Shared\Components\[ViewComponentName]\ directory of your application and have the name must be [ViewComponentName].hv.html
+    </Details>
+  </Error>
+  <Error errorNumber="1015">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views/Shared/Components
+    </Label>
+    <Description>
+      ViewComponent 'div' element container missing
+    </Description>
+    <Details>
+      The ViewComponent must be enclosed in an empty DIV element.
+      <![CDATA[<br/>]]>
+      Check that every component in the view or layout file are enclosed in an empty DIV element.
+      <![CDATA[<br/><br/>
+      ]]>
+    </Details>
+  </Error>
+  <Error errorNumber="1016">
+    <Label>
+      Compilation Error in ~/Application/wwwroot/Views
+    </Label>
+    <Description>
+      An error occurs in HandleView HV_FactoryCodeBehindView class. Please view the details and stack trace below to help you.
+    </Description>
+    <Details>
+      The CodeBehindView name was not found in the list.
+      Check the CreateCodeBehindView() function in the HV_FactoryCodeBehindView class and make sure the Select Case include the right name for your CodeBehindView class in uppercase.
+      <![CDATA[<br/><br/>]]>
+      Remember that the format in the Select Case is : [ControllerName].[ViewName]
+    </Details>
+  </Error>
+  <Error errorNumber="1017">
+    <Label>
+      Compilation Error in ~/Handle
+    </Label>
+    <Description>
+      HTML element can't be binded to a request event.
+    </Description>
+    <Details>
+      Add this type of element in the Handle property of the HV_Handle class if you want to use it as a bindable element. Check Stack Trace to know which kind of element to add.
+    </Details>
+  </Error>
+  <Error errorNumber="1018">
+    <Label>
+      Compilation Error in ~/Handle
+    </Label>
+    <Description>
+      Wrong 'data-hv-request-url' attribute syntax
+    </Description>
+    <Details>
+      The value of the 'data-hv-request-url' attribute must be [ControllerName]/[ActionName]?Param1=a;Param2=b where the '?Param1=a;Param2=b' part is optional. Check your handle in the View or Layout HTML files.
+    </Details>
+  </Error>
+  <Error errorNumber="1019">
+    <Label>
+      Runtime Error
+    </Label>
+    <Description>
+      Unexpected error when calling the action of a controller. See Stack Trace below for the Action and Controller name.
+    </Description>
+    <Details>
+      Possible causes for this error are:
+      <![CDATA[<br/><br/>]]>
+      1) Mistyped action name in the View/Layout HTML file - Check the data-hv-request-url attributes values.
+      <![CDATA[<br/>]]>
+      2) Wrong number of parameters for the called action. - Check the data-hv-request-url attributes values for parameters.
+      <![CDATA[<br/>]]>
+      3) Plain bad syntax in the data-hv-request-url attributes values
+    </Details>
+  </Error>
+  
+</xoErrorList>
