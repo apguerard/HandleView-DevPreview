@@ -1,0 +1,1 @@
+{"Timestamp":"2021-02-23T20:00:07.30","Level":"CRITICAL","MessageTemplate":"Unmanaged Exception happened in the framework. The  application had to close.","Properties":{"UserName":"scott.reeves","ComputerName":"DELL17","OS":"Windows_NT"},"Exception":{"Number":2022,"Message":"The RouterPort named: 'content' does  not exist in the Router's RouterPort Tree."}}

@@ -8,7 +8,7 @@
 
 $(document).ready(function(){
    
-    disableBrowserRightClick();  
+     disableBrowserRightClick();  
 
 });
 

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*------------------------------------------------------------------
 [Master Stylesheet]
 Project:	HandleView
@@ -6,34 +7,43 @@ Project:	HandleView
 ++++ Reset ++++
 ++++ Basic ++++
 -------------------------------------------------------------------*/
+
+
 /****************************/
+
+
 /** Imports **/
-/****************************/
-/*
-@import url(./bootstrap.min.css);
-@import url(./jquery-ui.css);
-*/
-@import url(./handleview.css);
-
 
 
 /****************************/
+
+@import url(../views/Shared/AppView/app.view.css);
+
+/****************************/
+
+
 /** Reset **/
-/****************************/
 
+
+/****************************/
 
 body {
-  color: #5e7d8a;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  font-family: 'Segoe UI', sans-serif;
-  line-height: 1.5;
-  background: #fff;
-  overflow: auto; 
-  height: 100%;}
+    color: #5e7d8a;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    background: #fff;
+    overflow: auto;
+    height: 100%;
+}
 
-a:hover, a:active {outline: 0; }
+a:hover,
+a:active {
+    outline: 0;
+}
 
-ul {list-style: none; }
-
+ul {
+    list-style: none;
+}
