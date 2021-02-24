@@ -4,3 +4,5 @@
 /Dev/*.log
 /Docs/
 /version.txt
+.vscode
+.vs
