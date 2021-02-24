@@ -1,0 +1,23 @@
+{
+  "name": "handleview",
+  "version": "0.0.1",
+  "description": "MS Access with a Modern UI",
+  "main": "App.accdb",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BluejacketSoftware/HandleView.git"
+  },
+  "keywords": [
+    "ms",
+    "access"
+  ],
+  "author": "Scott Reeves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluejacketSoftware/HandleView/issues"
+  },
+  "homepage": "https://github.com/BluejacketSoftware/HandleView#readme"
+}
