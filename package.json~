@@ -1,6 +1,6 @@
 {
   "name": "handleview",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "MS Access with a Modern UI",
   "main": "App.accdb",
   "scripts": {
